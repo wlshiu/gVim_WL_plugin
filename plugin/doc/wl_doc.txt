@@ -1,0 +1,147 @@
+*wl_doc.txt*	For Vim version 7.3.  
+
+            My hotkey
+================= shell cmd ==========================
+# 文件瀏覽
+:Ex : 開啟目錄瀏覽器，注意首字母E是大寫的
+:Sex : 在一個分割的窗口中開啟目錄瀏覽器
+:ls : 顯示當前buffer的情況
+:cd .. : 進入父目錄
+:args : 顯示目前打開的文件
+:lcd %:p:h : 更改到當前文件所在的目錄
+ # 譯釋：lcd是緊緊改變當前窗口的工作路徑，% 是代表當前文件的文件名,
+ # 加上 :p擴展成全名（就是帶了路徑），加上 :h析取出路徑 
+
+:lcd %:h		,切換work directory到目前file的目錄
+
+:cw                 ,秀出 quickFixf視窗
+
+
+
+================== Hot key ===========================
+----- ctags/cscope --------
+:!ctags -R
+ or 
+:!ctags -L cscope.files (create by find cmd)
+
+:!cscope -Rbq
+ or
+:!cscope -Rbq -i cscope.file(create by find cmd)
+ or
+:!cscope -Rbq -P selected_dir1 -P selected_dir2 ...
+
+
+:set tags=your_tags_file_path
+:cs add cscope.out
+
+    CTRL-]  go to function define
+    CTRL-T  pop previous function
+    CTRL-O  pop previous function
+        
+:cs find f|s|g|d|c|t|e|i| selected_word
+
+    <C-\>s = cs find s 游標目前單詞
+    <C-\>g = cs find g 游標目前單詞
+    <C-\>c = cs find c 游標目前單詞
+    <C-\>t = cs find t 游標目前單詞
+    <C-\>e = cs find e 游標目前單詞
+    <C-\>f = cs find f 游標目前單詞
+    <C-\>i = cs find i 游標目前單詞
+    <C-\>d = cs find d 游標目前單詞
+    
+    f: 查找並打開文檔，類似vim的find功能
+    s: 查找C語言符號，即查找函數名、宏、枚舉值等出現的地方
+    g: 查找函數、宏、枚舉等定義的位置，類似ctags所提供的功能
+    d: 查找本函數會使用的function
+    c: 查找reference 本函數的function
+    t: 查找指定的字符串
+    e: 查找egrep模式，相當於egrep功能，但查找速度快多了
+    i: 查找包含本文檔的文
+
+支援 C++
+step 1. 建立搜尋file list (generate cscope.files)
+    :find . -name "*.h" -o -name "*.c" -o -name "*.cc" -name "*.cpp" > cscope.files
+setp 2. 開始建立索引 cscope.out    
+    :cscope -bkq -i cscope.files
+    
+----- A plug-in --------
+開啟對應的 header file
+:A 	    切換到 h file
+:AS 	橫向分割開啟 h file
+:AV 	縱向分割開啟 h file
+:AT 	新tab 開啟 h file
+
+----- FuzzyFinder -----------
+: FufFile
+    in search bar
+    "**\" recursive
+    ex. **\關鍵字
+
+FuzzyFinder 提供的 cmd    
+    FufBuffer      -  Buffer mode (fuf-buffer-mode)
+    FufFile        -  File mode (fuf-file-mode)
+    FufDir         -  Directory mode (fuf-dir-mode)
+    FufMruFile     -  MRU-File mode (fuf-mrufile-mode)
+    FufMruCmd      -  MRU-Command mode (fuf-mrucmd-mode)
+    FufBookmark    -  Bookmark mode (fuf-bookmark-mode)
+    FufTag         -  Tag mode (fuf-tag-mode)
+    FufTaggedFile  -  Tagged-File mode (fuf-taggedfile-mode)
+    FufJumpList    -  Jump-List mode (fuf-jumplist-mode)
+    FufChangeList  -  Change-List mode (fuf-changelist-mode)
+    FufQuickfix    -  Quickfix mode (fuf-quickfix-mode)
+    FufLine        -  Line mode (fuf-line-mode)
+    FufHelp        -  Help mode (fuf-help-mode)
+
+特殊配置:
+  map <silent> <C-\> :FufTag! <C-r>=expand('<cword>')<CR><CR> 
+  只需在要查的關鍵字上按下Ctrl+\便能用FuzzyFinderTag來查詢 
+  
+  Ctrl-n , Ctrl-p 上下選擇項目
+  Ctrl-j          開啟該檔案到水平分割視窗
+  Ctrl-k          開啟該檔案到垂直分割視窗
+  Ctrl-l          開啟檔案至新分頁
+  
+----- AutoComplPop -----------
+在補全視窗選擇 item
+<C-n> 
+<C-p>
+
+----- Buffer explorer --------
+In "normal mode"
+
+\be : full screen buffer browser 
+\bv : vertical split screen buffer browser
+\bs : horizontal split screen buffer browser
+q   : exit
+
+----- Wind Contorl --------
+<C-w> n 新建一個窗口並創建一個新文件
+<C-w> s 新建一個水平窗口並打開當前文件
+<C-w> v 新建一個垂直窗口並打開當前文件
+<C-w> c 關閉當前窗口
+<C-w> q 離開 vim，( :q)
+<C-w> <C-w>      順序切換窗口
+<C-w> o 關閉其他窗口只留下當前窗口
+<C-w> j 切換到下一個窗口
+<C-w> k 切換到上一個窗口
+<C-w> r 上下窗口調換位置
+<C-w> - 減小當前窗口高度
+<C-w> + 增加當前窗口高度
+:res -n 減小當前窗口高度n行
+:res +n 增加當前窗口高度n行
+
+--------- windows下GVim的塊選擇方式 -------------
+On Unix:
+    Type <C-V> and select your block of text.
+On Windows with Gvim
+    Enter Visual Mode"v" then <C-q>.
+
+
+
+
+
+
+
+
+
+
