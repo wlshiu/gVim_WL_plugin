@@ -154,7 +154,7 @@ map <S-q> :s/^\/\///<CR>
 "/***************************************************************
 "* taglist setting 
 "***************************************************************/
-"let ctags="D:\project\_portable_tool\GVimPortable\App\vim\vim73\ctags.exe"
+"let ctags='$VIMRUNTIME\ctags.exe'
 "// 設定ctags.exe路徑
 "let Tlist_Ctags_Cmd='ctags.exe'
 
@@ -197,10 +197,17 @@ let NERDTreeHighlightCursorline=1
 nmap <A-n> :NERDTreeToggle<CR> 
 
 "/***************************************************************
+"* clang complete
+"***************************************************************/
+let g:clang_snippets=0
+let g:clang_use_library=1
+let g:clang_library_path=$VIMRUNTIME
+
+"/***************************************************************
 "* Cscope setting 
 "***************************************************************/
 "//設定 cscope.exe 路徑
-"let cscope="D:\project\_portable_tool\GVimPortable\App\vim\vim73\cscope.exe"
+"let cscope='$VIMRUNTIME\cscope.exe'
 
 "// 同時搜索 ctags和 cscope且以 cscope優先
 if has("cscope")
@@ -258,7 +265,7 @@ let g:ctrlp_map = '<A-w>'
 "/***************************************************************
 "* AStyle
 "***************************************************************/
-let astyle="C:\Users\redegg\Desktop\GVimPortable\App\vim\vim73\astyle.exe"
+let astyle='$VIMRUNTIME\astyle.exe'
 func CodeFormat()
     "取得cursor所在行號
     let lineNum = line(".")
