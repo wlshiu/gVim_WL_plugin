@@ -114,6 +114,11 @@ In "normal mode"
 \bs : horizontal split screen buffer browser
 q   : exit
 
+----- MiniBufExplorer --------
+:bn   打開當前buffer的下一個buffer
+:bp   打開當前buffer的前一個buffer
+:b"num"   打開指定的buffer，"num"指的是buffer開始的那個數字
+
 ----- Wind Contorl --------
 <C-w> n 新建一個窗口並創建一個新文件
 <C-w> s 新建一個水平窗口並打開當前文件
