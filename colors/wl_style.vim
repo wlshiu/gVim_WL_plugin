@@ -4,15 +4,15 @@
 
 set background=dark
 
-"let mysys="windows"
-if MySys() == "windows"
-    set guifont=fixedsys:h12
+if(has("win32"))
+    "set guifont=fixedsys:h12
+    set guifont=consolas:h12
     "set guifont=monaco:h10
     
     " full screen 
     au GUIEnter * simalt ~x
 
-elseif MySys() == "linux"
+else
     "set guifont=fixedsys\ 12
     set guifont=monaco\ 10
 endif

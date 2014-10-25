@@ -13,6 +13,7 @@
 "  Plugin 'gmarik/Vundle.vim'
 "
 "  Plugin 'Valloric/YouCompleteMe'
+"  Plugin ''scrooloose/syntastic''
 "
 "  "// All of your Plugins must be added before the following line
 "  call vundle#end()            "// required
@@ -219,6 +220,13 @@ let NERDTreeHighlightCursorline=1
 nmap <A-n> :NERDTreeToggle<CR>
 
 "/***************************************************************
+"* clang complete
+"***************************************************************/
+" let g:clang_snippets=0
+" let g:clang_use_library=1
+" let g:clang_library_path=$VIMRUNTIME
+
+"/***************************************************************
 "* Cscope setting
 "***************************************************************/
 "  "//³]©w cscope.exe ¸ô®|
@@ -256,17 +264,11 @@ nmap <A-n> :NERDTreeToggle<CR>
 "  map <A-g> <Esc>:call GenTag()<CR>
 "  "map <S-g> <Esc>:call GenTag()<CR> "// terminal mode can use Alt, so change Shift
 
-if(has("win32"))
-    let g:iswindows=1
-else
-    let g:iswindows=0
-endif
-
 let cscope='$VIMRUNTIME\cscope.exe'
 function Do_CsTag()
     let dir = getcwd()
     if filereadable("tags")
-        if(g:iswindows==1)
+        if(has("win32"))
             let tagsdeleted=delete(dir."\\"."tags")
         else
             let tagsdeleted=delete("./"."tags")
@@ -280,7 +282,7 @@ function Do_CsTag()
         silent! execute "cs kill -1"
     endif
     if filereadable("cscope.files")
-        if(g:iswindows==1)
+        if(has("win32"))
             let csfilesdeleted=delete(dir."\\"."cscope.files")
         else
             let csfilesdeleted=delete("./"."cscope.files")
@@ -291,7 +293,7 @@ function Do_CsTag()
         endif
     endif
     if filereadable("cscope.out")
-        if(g:iswindows==1)
+        if(has("win32"))
             let csoutdeleted=delete(dir."\\"."cscope.out")
         else
             let csoutdeleted=delete("./"."cscope.out")
@@ -306,10 +308,10 @@ function Do_CsTag()
         silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
     endif
     if(executable('cscope') && has("cscope") )
-        if(g:iswindows!=1)
-            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
-        else
+        if(has("win32"))
             silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+        else
+            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
         endif
         silent! execute "!cscope -b"
         execute "normal :"
