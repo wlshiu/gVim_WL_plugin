@@ -1,3 +1,25 @@
+"  "//==============================
+"  "// Vundle Setting
+"  "//==============================
+"  "set nocompatible              "// be iMproved, required
+"  filetype off                  "// required
+"
+"  "// set the runtime path to include Vundle and initialize
+"  set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+"  let path='$VIM/vimfiles/bundle'
+"  call vundle#begin(path)
+"
+"  "// let Vundle manage Vundle, required
+"  Plugin 'gmarik/Vundle.vim'
+"
+"  Plugin 'Valloric/YouCompleteMe'
+"
+"  "// All of your Plugins must be added before the following line
+"  call vundle#end()            "// required
+"  filetype plugin indent on    "// required
+"  "//=====================================================
+
+
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
@@ -59,15 +81,15 @@ endfunction
 "* personal style setting
 "***************************************************************/
 "// 設置個人顯示風格
-if !exists("syntax_on") 
-    syntax on 
-endif 
+if !exists("syntax_on")
+    syntax on
+endif
 
 set guifont=monaspace\ 12
 colorscheme wl_style
 
 "//設置視窗大小
-set lines=42 columns=140 
+set lines=42 columns=140
 
 "//設置cmd window size
 set cmdheight=3
@@ -76,7 +98,7 @@ set cmdheight=3
 set number
 
 " 用 space 代替 tab
-set expandtab  
+set expandtab
 
 "// 設置TAB寬度
 set tabstop=4
@@ -84,8 +106,8 @@ set tabstop=4
 "// 自動縮排長度
 set shiftwidth=4
 
-" 智慧對齊方式 
-set smartindent  
+" 智慧對齊方式
+set smartindent
 
 "// 自動縮排
 set autoindent
@@ -93,8 +115,8 @@ set autoindent
 "// 逐層向上搜尋 tags file
 set tags=tags;
 
-"//自動切換working directory, 以current file 所在目錄為主 
-"set autochdir  
+"//自動切換working directory, 以current file 所在目錄為主
+"set autochdir
 
 "// 設定狀態列
 set laststatus=2
@@ -112,7 +134,7 @@ endif
 set showmode
 
 " 操作過程有衝突時，以明確的文字來詢問
-set confirm  
+set confirm
 
 " Alt default是配給 Menu的第一個底線選項, 將 Alt預設 disable
 set winaltkeys=no
@@ -132,10 +154,10 @@ set noswapfile
 "// 視窗滾動保留列數
 set scrolloff=5
 
-"Set to auto read when a file is changed from the outside  
-set autoread  
+"Set to auto read when a file is changed from the outside
+set autoread
 "/***************************************************************
-"* folding setting 
+"* folding setting
 "***************************************************************/
 "set foldmethod=syntax   "// 依內容
 "set foldmethod=Mark    "// 依自訂
@@ -144,7 +166,7 @@ set foldnestmax=3
 set foldcolumn=3
 
 "/***************************************************************
-"* other setting 
+"* other setting
 "***************************************************************/
 "alt+q 設定為產生C語言的註解//
 map <A-q> :s/^/\/\/<CR>/;<CR>
@@ -152,7 +174,7 @@ map <A-q> :s/^/\/\/<CR>/;<CR>
 map <S-q> :s/^\/\///<CR>
 
 "/***************************************************************
-"* taglist setting 
+"* taglist setting
 "***************************************************************/
 "let ctags='$VIMRUNTIME\ctags.exe'
 "// 設定ctags.exe路徑
@@ -180,7 +202,7 @@ let Tlist_Process_File_Always=1
 nmap tl :TlistToggle<CR>
 
 "/***************************************************************
-"* NERD Tree setting 
+"* NERD Tree setting
 "***************************************************************/
 let NERDTreeWinPos='right'
 
@@ -193,69 +215,127 @@ let NERDChristmasTree=1
 "// highlight 目前 cursor的列
 let NERDTreeHighlightCursorline=1
 
-"nmap <S-n> :NERDTreeToggle<CR> 
-nmap <A-n> :NERDTreeToggle<CR> 
+"nmap <S-n> :NERDTreeToggle<CR>
+nmap <A-n> :NERDTreeToggle<CR>
 
 "/***************************************************************
-"* clang complete
+"* Cscope setting
 "***************************************************************/
-let g:clang_snippets=0
-let g:clang_use_library=1
-let g:clang_library_path=$VIMRUNTIME
+"  "//設定 cscope.exe 路徑
+"  "let cscope='$VIMRUNTIME\cscope.exe'
+"
+"  "// 同時搜索 ctags和 cscope且以 cscope優先
+"  if has("cscope")
+"      set cscopequickfix=s-,c-,d-,i-,t-,e-
+"      set csto=0
+"      set cst
+"      set csverb
+"  endif
+"
+"  func Add_CSOut()
+"      let i = 1
+"      while i < 8
+"          if filereadable("cscope.out")
+"            cs add cscope.out
+"            let i = 8
+"          else
+"            cd ..
+"            let i += 1
+"          endif
+"      endwhile
+"  endfunc
+"
+"  func GenTag()
+"      let lineNum = line(".")
+"      exec "! ctags --sort=foldcase -R"
+"      exec "! cscope -Rb"
+"      exec lineNum
+"  endfunc
+"
+"  map <A-F7> <Esc>:call Add_CSOut()<CR>
+"  map <A-g> <Esc>:call GenTag()<CR>
+"  "map <S-g> <Esc>:call GenTag()<CR> "// terminal mode can use Alt, so change Shift
 
-"/***************************************************************
-"* Cscope setting 
-"***************************************************************/
-"//設定 cscope.exe 路徑
-"let cscope='$VIMRUNTIME\cscope.exe'
-
-"// 同時搜索 ctags和 cscope且以 cscope優先
-if has("cscope")
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-    set csto=0
-    set cst
-    set csverb
+if(has("win32"))
+    let g:iswindows=1
+else
+    let g:iswindows=0
 endif
 
-func Add_CSOut()
-    let i = 1
-    while i < 8
-        if filereadable("cscope.out")
-          cs add cscope.out 
-          let i = 8
+let cscope='$VIMRUNTIME\cscope.exe'
+function Do_CsTag()
+    let dir = getcwd()
+    if filereadable("tags")
+        if(g:iswindows==1)
+            let tagsdeleted=delete(dir."\\"."tags")
         else
-          cd ..
-          let i += 1
+            let tagsdeleted=delete("./"."tags")
         endif
-    endwhile
-endfunc
+        if(tagsdeleted!=0)
+            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+            return
+        endif
+    endif
+    if has("cscope")
+        silent! execute "cs kill -1"
+    endif
+    if filereadable("cscope.files")
+        if(g:iswindows==1)
+            let csfilesdeleted=delete(dir."\\"."cscope.files")
+        else
+            let csfilesdeleted=delete("./"."cscope.files")
+        endif
+        if(csfilesdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
+            return
+        endif
+    endif
+    if filereadable("cscope.out")
+        if(g:iswindows==1)
+            let csoutdeleted=delete(dir."\\"."cscope.out")
+        else
+            let csoutdeleted=delete("./"."cscope.out")
+        endif
+        if(csoutdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
+            return
+        endif
+    endif
+    if(executable('ctags'))
+        "silent! execute "!ctags -R --c-types=+p --fields=+S *"
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+    endif
+    if(executable('cscope') && has("cscope") )
+        if(g:iswindows!=1)
+            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+        else
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+        endif
+        silent! execute "!cscope -b"
+        execute "normal :"
+        if filereadable("cscope.out")
+            execute "cs add cscope.out"
+        endif
+    endif
+endfunction
 
-func GenTag()
-    let lineNum = line(".")
-    exec "! ctags --sort=foldcase -R"
-    exec "! cscope -Rb"
-    exec lineNum
-endfunc
-
-map <A-F7> <Esc>:call Add_CSOut()<CR>
-map <A-g> <Esc>:call GenTag()<CR>
-"map <S-g> <Esc>:call GenTag()<CR> "// terminal mode can use Alt, so change Shift
+map <A-g> <Esc>:call Do_CsTag()<CR>
 
 "/***************************************************************
 "* QuickFix (default plug-in)
 "***************************************************************/
 "//直接向前或向後跳到 quickFix wind項目的位置
-nmap <F6> :cn<CR> 
+nmap <F6> :cn<CR>
 nmap <F7> :cp<CR>
 
 "/***************************************************************
 "* FuzzyFinder
 "***************************************************************/
-nmap <A-s> :FufTag<CR> 
-"nmap <A-w> :FufFile<CR> 
+nmap <A-s> :FufTag<CR>
+"nmap <A-w> :FufFile<CR>
 "// terminal mode can use Alt, so change Shift
-"nmap <S-s> :FufTag<CR> 
-"nmap <S-w> :FufFile<CR> 
+"nmap <S-s> :FufTag<CR>
+"nmap <S-w> :FufFile<CR>
 
 "/***************************************************************
 "* CtrlP
@@ -273,7 +353,7 @@ func CodeFormat()
     if &filetype == 'java'
         "執行外部程序的命令
         exec "%! astyle -A2Lfpjk3NS\<CR>"
-    else 
+    else
         "執行外部程序的命令
         exec "%! astyle  -A1 -t4 -b -S -K -k3 -M40 -m0  -j -c -p\<CR>"
     endif
