@@ -1,4 +1,4 @@
-*wl_doc.txt*	For Vim version 7.3.  
+*wl_doc.txt*	For Vim version 7.3.
 
             My hotkey
 ================= shell cmd ==========================
@@ -10,7 +10,7 @@
 :args : 顯示目前打開的文件
 :lcd %:p:h : 更改到當前文件所在的目錄
  # 譯釋：lcd是緊緊改變當前窗口的工作路徑，% 是代表當前文件的文件名,
- # 加上 :p擴展成全名（就是帶了路徑），加上 :h析取出路徑 
+ # 加上 :p擴展成全名（就是帶了路徑），加上 :h析取出路徑
 
 :lcd %:h		,切換work directory到目前file的目錄
 
@@ -21,7 +21,7 @@
 ================== Hot key ===========================
 ----- ctags/cscope --------
 :!ctags -R
- or 
+ or
 :!ctags -L cscope.files (create by find cmd)
 
 :!cscope -Rbq
@@ -37,7 +37,7 @@
     CTRL-]  go to function define
     CTRL-T  pop previous function
     CTRL-O  pop previous function
-        
+
 :cs find f|s|g|d|c|t|e|i| selected_word
 
     <C-\>s = cs find s 游標目前單詞
@@ -48,7 +48,7 @@
     <C-\>f = cs find f 游標目前單詞
     <C-\>i = cs find i 游標目前單詞
     <C-\>d = cs find d 游標目前單詞
-    
+
     f: 查找並打開文檔，類似vim的find功能
     s: 查找C語言符號，即查找函數名、宏、枚舉值等出現的地方
     g: 查找函數、宏、枚舉等定義的位置，類似ctags所提供的功能
@@ -61,9 +61,9 @@
 支援 C++
 step 1. 建立搜尋file list (generate cscope.files)
     :find . -name "*.h" -o -name "*.c" -o -name "*.cc" -name "*.cpp" > cscope.files
-setp 2. 開始建立索引 cscope.out    
+setp 2. 開始建立索引 cscope.out
     :cscope -bkq -i cscope.files
-    
+
 ----- A plug-in --------
 開啟對應的 header file
 :A 	    切換到 h file
@@ -77,7 +77,7 @@ setp 2. 開始建立索引 cscope.out
     "**\" recursive
     ex. **\關鍵字
 
-FuzzyFinder 提供的 cmd    
+FuzzyFinder 提供的 cmd
     FufBuffer      -  Buffer mode (fuf-buffer-mode)
     FufFile        -  File mode (fuf-file-mode)
     FufDir         -  Directory mode (fuf-dir-mode)
@@ -93,23 +93,23 @@ FuzzyFinder 提供的 cmd
     FufHelp        -  Help mode (fuf-help-mode)
 
 特殊配置:
-  map <silent> <C-\> :FufTag! <C-r>=expand('<cword>')<CR><CR> 
-  只需在要查的關鍵字上按下Ctrl+\便能用FuzzyFinderTag來查詢 
-  
+  map <silent> <C-\> :FufTag! <C-r>=expand('<cword>')<CR><CR>
+  只需在要查的關鍵字上按下Ctrl+\便能用FuzzyFinderTag來查詢
+
   Ctrl-n , Ctrl-p 上下選擇項目
   Ctrl-j          開啟該檔案到水平分割視窗
   Ctrl-k          開啟該檔案到垂直分割視窗
   Ctrl-l          開啟檔案至新分頁
-  
+
 ----- AutoComplPop -----------
 在補全視窗選擇 item
-<C-n> 
+<C-n>
 <C-p>
 
 ----- Buffer explorer --------
 In "normal mode"
 
-\be : full screen buffer browser 
+\be : full screen buffer browser
 \bv : vertical split screen buffer browser
 \bs : horizontal split screen buffer browser
 q   : exit
@@ -140,6 +140,11 @@ On Unix:
     Type <C-V> and select your block of text.
 On Windows with Gvim
     Enter Visual Mode"v" then <C-q>.
+
+--------- cctree -------------
+Displays hierarchical call-trees
+c. : 本函數會使用的function tree
+c, : reference 本函數的function
 
 --------- DrawIt -------------
    \di to start DrawIt and
@@ -180,7 +185,5 @@ Supported Features
    \ra ... \rz  replace text with given brush/register
    \pa ...      like \ra ... \rz, except that blanks are considered
                 to be transparent
-
-
 
 

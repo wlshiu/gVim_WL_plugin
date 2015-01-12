@@ -319,9 +319,12 @@ function Do_CsTag()
             execute "cs add cscope.out"
         endif
     endif
+
+    CCTreeLoadDB
 endfunction
 
-map <A-g> <Esc>:call Do_CsTag()<CR>
+" do ctag and cscope, finally load cscope.out to CCTree
+map <A-g> <Esc>:call Do_CsTag() <CR>
 
 "/***************************************************************
 "* QuickFix (default plug-in)
@@ -343,6 +346,16 @@ nmap <A-s> :FufTag<CR>
 "* CtrlP
 "***************************************************************/
 let g:ctrlp_map = '<A-w>'
+
+"/***************************************************************
+"* cctree
+"***************************************************************/
+"key CCTreeLoadDB 後 enter 自動選上 cscope.out
+let g:CCTreeCscopeDb = "cscope.out"
+" set hot key
+let g:CCTreeKeyTraceForwardTree = 'c.'
+let g:CCTreeKeyTraceReverseTree = 'c,'
+set updatetime=0
 
 "/***************************************************************
 "* AStyle
