@@ -146,6 +146,15 @@ Displays hierarchical call-trees
 c. : 本函數會使用的function tree
 c, : reference 本函數的function
 
+--------- Trinity -------------
+管理Source Explorer/Tag List/NERD_tree的 layout
+Source Explorer     自動顯示定義
+
+<C-F7> : Open and close all the three plugins on the same time
+<C-F9> : Open and close the srcexpl.vim separately
+<C-F10>: Open and close the taglist.vim separately
+<C-F11>: Open and close the NERD_tree.vim separately
+
 --------- DrawIt -------------
    \di to start DrawIt and
    \ds to stop  DrawIt.
