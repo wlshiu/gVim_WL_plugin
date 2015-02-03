@@ -457,6 +457,32 @@ hi def link cCppOutIf2		cCppOut2  " Old syntax group for #if 0 body
 hi def link cCppOut2		cCppOut  " Old syntax group for #if of #if 0
 hi def link cCppOut		Comment
 
+
+"========================================================
+" My Highlight
+"========================================================
+" Operators
+syn match cOperator	"\(<<\|>>\|[-+*/%&^|<>!=]\)="
+syn match cOperator	"<<\|>>\|&&\|||\|++\|--\|->"
+syn match cOperator	"[.!~*&%<>^|=,+-]"
+syn match cOperator	"/[^/*=]"me=e-1
+syn match cOperator	"/$"
+syn match cOperator "&&\|||"
+syn match cOperator	"[][]"
+
+" Highlight Class and Function names
+syn match    cCustomParen    "(" contains=cParen
+syn match    cCustomFunc     "\w\+\s*(" contains=cCustomParen
+syn match    cCustomScope    "::"
+syn match    cCustomClass    "\w\+\s*::" contains=cCustomScope
+
+
+"hi cCustomFunc guifg=yellowgreen
+hi cCustomFunc guifg=#FF7BBD
+hi cCustomClass guifg=#00FF00
+"------------------------------------------------------
+
+
 let b:current_syntax = "c"
 
 unlet s:ft
