@@ -155,6 +155,9 @@ Source Explorer     自動顯示定義
 <C-F10>: Open and close the taglist.vim separately
 <C-F11>: Open and close the NERD_tree.vim separately
 
+--------- Mark -------------
+\m : highlight selected word
+
 --------- DrawIt -------------
    \di to start DrawIt and
    \ds to stop  DrawIt.
