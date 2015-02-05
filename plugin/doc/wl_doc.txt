@@ -156,7 +156,8 @@ Source Explorer     自動顯示定義
 <C-F11>: Open and close the NERD_tree.vim separately
 
 --------- Mark -------------
-\m : highlight selected word
+\m              highlight selected word
+:MarkClear      clear all mark
 
 --------- DrawIt -------------
    \di to start DrawIt and
