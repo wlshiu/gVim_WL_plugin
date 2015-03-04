@@ -715,7 +715,7 @@ function s:GetFileTypeSettings(ft)
 		    \ substitute(&commentstring, '.*%s', "", "")
     " wl definition
     elseif fileType =~ '^\(c\|cpp\|h\|hpp\|cc\)$'
-	let b:ECcommentOpen = '//'
+	let b:ECcommentOpen = '// '
 	let b:ECcommentClose = ''
     " Multipart comments:
     elseif fileType =~ '^\(c\|b\|css\|csc\|cupl\|indent\|jam\|lex\|lifelines\|'.
