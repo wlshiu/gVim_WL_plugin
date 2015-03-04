@@ -26,6 +26,13 @@
 刪除字尾空白
 :%s/\s\+$//g
 
+----- 區塊註解 -----------
+於控制選項(ESC下), 游標移動至要註解的開頭第一個字
+按Ctrl-V, 接著往下選取要註解的區塊
+按大寫I插入. 插入註解符號(如’, //, #)
+最後, 按Esc, 返回控制選項
+ps. windows環境下, 需先取消預設 hotkey ctrl-v = 貼上 (unmap <C-V> in _vimrc)
+
 ----- ctags/cscope --------
 :!ctags -R
  or
@@ -147,6 +154,18 @@ On Unix:
     Type <C-V> and select your block of text.
 On Windows with Gvim
     Enter Visual Mode"v" then <C-q>.
+
+
+--------- EnhancedCommentify -------------
+進visual mode選取一段文字，然後按下
+
+"\x" (反斜線+x)
+
+這些文字就會全部被註解掉了.
+取消註解, 同樣地選取起來, 再按一下"\x"就可以了.
+
+也可以用"\c", 會自動跳到下一行.
+
 
 --------- cctree -------------
 Displays hierarchical call-trees
