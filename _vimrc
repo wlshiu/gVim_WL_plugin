@@ -93,7 +93,7 @@ colorscheme wl_style
 set lines=42 columns=140
 
 "//設置cmd window size
-set cmdheight=3
+set cmdheight=2
 
 "// 顯示行號
 set number
@@ -153,15 +153,19 @@ set noswapfile
 "set fileencodings=utf-8,cp950
 
 "// 視窗滾動保留列數
-set scrolloff=5
+set scrolloff=3
 
 "Set to auto read when a file is changed from the outside
 set autoread
+
+"// 取消 ctrl+v 定義
+unmap <C-V>
+
 "/***************************************************************
 "* folding setting
 "***************************************************************/
 "set foldmethod=syntax   "// 依內容
-"set foldmethod=Mark    "// 依自訂
+"set foldmethod=marker    "// 依自訂
 "set foldmethod=indent  "// 依縮排
 set foldnestmax=3
 set foldcolumn=3
@@ -170,9 +174,9 @@ set foldcolumn=3
 "* other setting
 "***************************************************************/
 "alt+q 設定為產生C語言的註解//
-map <A-q> :s/^/\/\/<CR>/;<CR>
+"map <c-k> :s/^/\/\/<CR>/;<CR>
 "shift+q 設定為刪除C語言的註解//
-map <S-q> :s/^\/\///<CR>
+"map <S-q> :s/^\/\///<CR>
 
 "/***************************************************************
 "* taglist setting
@@ -229,6 +233,10 @@ nmap <A-n> :NERDTreeToggle<CR>
 "/***************************************************************
 "* Cscope setting
 "***************************************************************/
+" 不使用 quickFix window
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+
 "  "//設定 cscope.exe 路徑
 "  "let cscope='$VIMRUNTIME\cscope.exe'
 "
@@ -320,7 +328,7 @@ function Do_CsTag()
         endif
     endif
 
-    CCTreeLoadDB
+    "CCTreeLoadDB
 endfunction
 
 " do ctag and cscope, finally load cscope.out to CCTree
@@ -357,11 +365,58 @@ let g:CCTreeKeyTraceForwardTree = 'c.'
 let g:CCTreeKeyTraceReverseTree = 'c,'
 set updatetime=0
 
+
+"/***************************************************************
+"* SrcExpl
+"***************************************************************/
+" // The switch of the Source Explorer
+nmap <F8> :SrcExplToggle<CR>
+
+" // Set the height of Source Explorer window
+let g:SrcExpl_winHeight = 8
+
+" // Set 100 ms for refreshing the Source Explorer
+let g:SrcExpl_refreshTime = 100
+
+" // Set "Enter" key to jump into the exact definition context
+let g:SrcExpl_jumpKey = "<ENTER>"
+
+" // Set "Space" key for back from the definition context
+let g:SrcExpl_gobackKey = "<SPACE>"
+
+" // In order to Avoid conflicts, the Source Explorer should know what plugins
+" // are using buffers. And you need add their bufname into the list below
+" // according to the command ":buffers!"
+let g:SrcExpl_pluginList = [
+        \ "__Tag_List__",
+        \ "_NERD_tree_"
+    \ ]
+
+" // Enable/Disable the local definition searching, and note that this is not
+" // guaranteed to work, the Source Explorer doesn't check the syntax for now.
+" // It only searches for a match with the keyword according to command 'gd'
+let g:SrcExpl_searchLocalDef = 1
+
+" // Do not let the Source Explorer update the tags file when opening
+let g:SrcExpl_isUpdateTags = 0
+
+" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
+" //  create/update a tags file
+let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+
+" // Set "<F12>" key for updating the tags file artificially
+let g:SrcExpl_updateTagsKey = "<F12>"
+
+" // Set "<F3>" key for displaying the previous definition in the jump list
+let g:SrcExpl_prevDefKey = "<F3>"
+
+" // Set "<F4>" key for displaying the next definition in the jump list
+let g:SrcExpl_nextDefKey = "<F4>"
 "/***************************************************************
 "* Trinity
 "***************************************************************/
 " Open and close all the three plugins on the same time
-nmap <C-F7> :TrinityToggleAll<CR>
+nmap <C-F8> :TrinityToggleAll<CR>
 " Open and close the srcexpl.vim separately
 nmap <C-F9> :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
