@@ -445,3 +445,23 @@ func CodeFormat()
 endfunc
 
 map <A-F8> <Esc>:call CodeFormat()<CR>
+
+"/***************************************************************
+"* 去除行末空白及最後的空白行
+"***************************************************************/
+" // Remove trailing whitespace when writing a buffer, but not for diff files.
+" // From: Vigil <vim5632@rainslide.net>
+" func RemoveTrailingWhitespace()
+"     if &ft != "diff"
+"         let b:curcol = col(".")
+"         let b:curline = line(".")
+"         silent! %s/\s\+$//
+"         silent! %s/\(\s*\n\)\+\%$//
+"         call cursor(b:curline, b:curcol)
+"     endif
+" endfunc
+"
+" autocmd BufWritePre * call RemoveTrailingWhitespace()
+
+nmap \d <Esc>:%s/\s\+$//g <CR>
+
