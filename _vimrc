@@ -158,6 +158,12 @@ set scrolloff=3
 "Set to auto read when a file is changed from the outside
 set autoread
 
+" Ignore case when searching
+set ignorecase
+
+"不對匹配的括號進行高亮顯示
+let loaded_matchparen=1
+
 "// 取消 ctrl+v 定義
 unmap <C-V>
 
@@ -173,10 +179,11 @@ set foldcolumn=3
 "/***************************************************************
 "* other setting
 "***************************************************************/
-"alt+q 設定為產生C語言的註解//
-"map <c-k> :s/^/\/\/<CR>/;<CR>
-"shift+q 設定為刪除C語言的註解//
-"map <S-q> :s/^\/\///<CR>
+" Delete trailing white space
+nmap \de <Esc>:%s/\s\+$//g <CR>
+
+" Remove the Windows ^M - when the encodings gets messed up
+nmap \dm <Esc>:%s/\r//g <CR>
 
 "/***************************************************************
 "* taglist setting
@@ -446,22 +453,4 @@ endfunc
 
 map <A-F8> <Esc>:call CodeFormat()<CR>
 
-"/***************************************************************
-"* 去除行末空白及最後的空白行
-"***************************************************************/
-" // Remove trailing whitespace when writing a buffer, but not for diff files.
-" // From: Vigil <vim5632@rainslide.net>
-" func RemoveTrailingWhitespace()
-"     if &ft != "diff"
-"         let b:curcol = col(".")
-"         let b:curline = line(".")
-"         silent! %s/\s\+$//
-"         silent! %s/\(\s*\n\)\+\%$//
-"         call cursor(b:curline, b:curcol)
-"     endif
-" endfunc
-"
-" autocmd BufWritePre * call RemoveTrailingWhitespace()
-
-nmap \d <Esc>:%s/\s\+$//g <CR>
 
