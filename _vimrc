@@ -185,6 +185,12 @@ nmap \de <Esc>:%s/\s\+$//g <CR>
 " Remove the Windows ^M - when the encodings gets messed up
 nmap \dm <Esc>:%s/\r//g <CR>
 
+" when press \ + Enter, the cursor break context to next line.
+nmap \<CR>  i<CR><ESC>
+
+" when press \ + Space, insert white spec at cursor.
+nmap \<SPACE>  i<SPACE><ESC>
+
 "/***************************************************************
 "* taglist setting
 "***************************************************************/
