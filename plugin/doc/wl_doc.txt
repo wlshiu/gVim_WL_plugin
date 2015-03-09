@@ -26,6 +26,9 @@
 刪除字尾空白
 :%s/\s\+$//g
 
+"// replace pre-existing tabs
+nmap \rt <Esc>:retab <CR>
+
 ----- 區塊註解 -----------
 於控制選項(ESC下), 游標移動至要註解的開頭第一個字
 按Ctrl-V, 接著往下選取要註解的區塊

@@ -98,7 +98,7 @@ set cmdheight=2
 "// 顯示行號
 set number
 
-" 用 space 代替 tab
+"// 用 space 代替 tab
 set expandtab
 
 "// 設置TAB寬度
@@ -134,13 +134,13 @@ endif
 "// 顯示現在的模式
 set showmode
 
-" 操作過程有衝突時，以明確的文字來詢問
+"// 操作過程有衝突時，以明確的文字來詢問
 set confirm
 
-" Alt default是配給 Menu的第一個底線選項, 將 Alt預設 disable
+"// Alt default是配給 Menu的第一個底線選項, 將 Alt預設 disable
 set winaltkeys=no
 
-"不備份
+"// 不備份
 set nobackup
 set nowritebackup
 set noswapfile
@@ -148,20 +148,20 @@ set noswapfile
 "// 自動換行選項
 "set nowrap
 
-" 檔案編碼
+"// 檔案編碼
 "set encoding=utf-8
 "set fileencodings=utf-8,cp950
 
 "// 視窗滾動保留列數
 set scrolloff=3
 
-"Set to auto read when a file is changed from the outside
+"// Set to auto read when a file is changed from the outside
 set autoread
 
-" Ignore case when searching
+"// Ignore case when searching
 set ignorecase
 
-"不對匹配的括號進行高亮顯示
+"// 不對匹配的括號進行高亮顯示
 let loaded_matchparen=1
 
 "// 取消 ctrl+v 定義
@@ -179,23 +179,26 @@ set foldcolumn=3
 "/***************************************************************
 "* other setting
 "***************************************************************/
-" Delete trailing white space
+"// Delete trailing white space
 nmap \de <Esc>:%s/\s\+$//g <CR>
 
-" Remove the Windows ^M - when the encodings gets messed up
+"// Remove the Windows ^M - when the encodings gets messed up
 nmap \dm <Esc>:%s/\r//g <CR>
 
-" when press \ + Enter, the cursor break context to next line.
+"// when press \ + Enter, the cursor break context to next line.
 nmap \<CR>  i<CR><ESC>
 
-" when press \ + Space, insert white spec at cursor.
+"// when press \ + Space, insert white spec at cursor.
 nmap \<SPACE>  i<SPACE><ESC>
 
-" Smart way to move between windows
+"// Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+"// replace pre-existing tabs
+nmap \rt <Esc>:retab <CR>
 "/***************************************************************
 "* taglist setting
 "***************************************************************/
