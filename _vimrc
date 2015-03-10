@@ -204,6 +204,10 @@ map <C-l> <C-W>l
 
 "// replace pre-existing tabs
 nmap \rt <Esc>:retab <CR>
+
+"// jump to line start/end
+nmap ms <Home>
+nmap me <End>
 "/***************************************************************
 "* taglist setting
 "***************************************************************/
