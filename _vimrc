@@ -375,7 +375,12 @@ nmap <A-s> :FufTag<CR>
 "* CtrlP
 "***************************************************************/
 let g:ctrlp_map = '<A-w>'
-
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|Debug|Release)$',
+  \ 'file': '\v\.(exe|so|dll|o|out|obj)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 "/***************************************************************
 "* cctree
 "***************************************************************/
