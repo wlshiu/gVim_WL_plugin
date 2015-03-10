@@ -100,7 +100,7 @@ function! <SID>Trinity_InitTagList()
     " Split to the right side of the screen
     let g:Tlist_Use_Left_Window = 1
     " Set the window width
-    let g:Tlist_WinWidth = 40
+    let g:Tlist_WinWidth = 32
     " Sort by the order
     let g:Tlist_Sort_Type = "order"
     " Do not display the help info

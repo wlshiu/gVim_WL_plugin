@@ -167,6 +167,11 @@ let loaded_matchparen=1
 "// 取消 ctrl+v 定義
 unmap <C-V>
 
+set hlsearch
+
+"// highlights the matching braces
+set showmatch
+
 "/***************************************************************
 "* folding setting
 "***************************************************************/
@@ -471,5 +476,6 @@ func CodeFormat()
 endfunc
 
 map <A-F8> <Esc>:call CodeFormat()<CR>
+
 
 

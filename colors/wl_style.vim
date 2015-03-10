@@ -161,5 +161,9 @@ hi link define          identifier
 hi link macro           identifier
 hi link PreCondit       identifier
 
+"/***************************************************************
+"* matchparen
+"***************************************************************/
+hi MatchParen cterm=none ctermbg=blue ctermfg=magenta guifg=magenta guibg=#FFDB72
 
 

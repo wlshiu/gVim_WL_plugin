@@ -36,6 +36,23 @@ nmap \rt <Esc>:retab <CR>
 最後, 按Esc, 返回控制選項
 ps. windows環境下, 需先取消預設 hotkey ctrl-v = 貼上 (unmap <C-V> in _vimrc)
 
+----- 範圍選取 -----------
+※以下看到的 "|" 是 or 的意思
+v | c | d  +  i | a  +  { | [ | " | '
+
+v: visual
+c: change
+d: delete
+i: inner object
+a: an object
+{},[],"",'': region
+
+va{ 選取最小範圍的{}部份
+vi{ 選取最小範圍的{}部份(但不包含{})
+di" 移除最小範圍的""部份(但不包含"")
+ci( 修改最小範圍的()部份(但不包含())
+va{= 選取最小範圍的{}部份並排列整齊
+
 ----- ctags/cscope --------
 :!ctags -R
  or
