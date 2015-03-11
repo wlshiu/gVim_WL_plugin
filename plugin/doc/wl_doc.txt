@@ -175,6 +175,23 @@ On Unix:
 On Windows with Gvim
     Enter Visual Mode"v" then <C-q>.
 
+--------- Align -------------
+處理文字對齊的問題，比如 source code 的宣告，賦值，或是註解等等。
+這邊介紹比較簡單的使用方式，詳情請參考說明檔 (:help Align)
+
+對齊賦值
+\t + "symbol"
+
+ex.
+    \t=     對齊 =
+    \t,     代表對齊逗號
+    \t|     對齊 |
+    \tsp    對齊空白字元
+    等等
+
+對齊宣告參數
+\adec
+    一樣用 visual mode 選取想要對齊的區域，輸入 \adec。
 
 --------- EnhancedCommentify -------------
 進visual mode選取一段文字，然後按下
