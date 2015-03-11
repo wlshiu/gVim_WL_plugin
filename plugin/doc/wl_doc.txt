@@ -1,4 +1,4 @@
-*wl_doc.txt*	For Vim version 7.3.
+*wl_doc.txt*    For Vim version 7.3.
 
             My hotkey
 ================= shell cmd ==========================
@@ -12,7 +12,7 @@
  # 譯釋：lcd是緊緊改變當前窗口的工作路徑，% 是代表當前文件的文件名,
  # 加上 :p擴展成全名（就是帶了路徑），加上 :h析取出路徑
 
-:lcd %:h		,切換work directory到目前file的目錄
+:lcd %:h        ,切換work directory到目前file的目錄
 
 :cw                 ,秀出 quickFixf視窗
 
@@ -100,10 +100,10 @@ setp 2. 開始建立索引 cscope.out
 
 ----- A plug-in --------
 開啟對應的 header file
-:A 	    切換到 h file
-:AS 	橫向分割開啟 h file
-:AV 	縱向分割開啟 h file
-:AT 	新tab 開啟 h file
+:A      切換到 h file
+:AS     橫向分割開啟 h file
+:AV     縱向分割開啟 h file
+:AT     新tab 開啟 h file
 
 ----- FuzzyFinder -----------
 : FufFile
@@ -175,7 +175,14 @@ On Unix:
 On Windows with Gvim
     Enter Visual Mode"v" then <C-q>.
 
+--------- tabular -------------
+:Tab / + "symbol"
+ex.
+    :Tab /=         對齊 =
+    :Tab /:         對齊 :
+
 --------- Align -------------
+ps. 造成有用leader key "\" 的 hotkey 都變慢
 處理文字對齊的問題，比如 source code 的宣告，賦值，或是註解等等。
 這邊介紹比較簡單的使用方式，詳情請參考說明檔 (:help Align)
 
