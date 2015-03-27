@@ -116,7 +116,7 @@ set autoindent
 "// 逐層向上搜尋 tags file
 set tags=tags;
 
-"//自動切換working directory, 以current file 所在目錄為主
+"// 自動切換working directory, 以current file 所在目錄為主
 "set autochdir
 
 "// 設定狀態列
@@ -460,6 +460,15 @@ nmap <C-F10> :TrinityToggleTagList<CR>
 nmap <C-F11> :TrinityToggleNERDTree<CR>
 
 "/***************************************************************
+"* Calzone
+"***************************************************************/
+function! ShowSignColumn()
+  sign define dummy
+  execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+endfunc
+au BufRead,BufNewFile * call ShowSignColumn()
+
+"/***************************************************************
 "* AStyle
 "***************************************************************/
 let astyle='$VIMRUNTIME\astyle.exe'
@@ -483,3 +492,9 @@ map <A-F8> <Esc>:call CodeFormat()<CR>
 
 
 
+" if exists(":Tabularize")
+  nmap \a= :Tabularize /=<CR>
+  vmap \a= :Tabularize /=<CR>
+  nmap \a<SPACE> :Tabularize / <CR>
+  vmap \a<SPACE> :Tabularize / <CR>
+" endif
