@@ -361,7 +361,7 @@ endfun
 
 "  hi default ifdefIfZero term=bold ctermfg=1 gui=italic guifg=DarkSeaGreen
 hi default link ifdefIfZero                     comment
-hi default link ifdefOutsideNeutral             comment
+" hi default link ifdefOutsideNeutral             comment
 hi default link ifdefCommentAtEnd               comment
 hi default link ifdefUndefined                  comment
 hi default link ifdefInUndefinedIf              comment
