@@ -67,4 +67,6 @@ endif
 
 let b:current_syntax = "cpp"
 
+source $VIMRUNTIME/syntax/ifdef.vim
+
 " vim: ts=8

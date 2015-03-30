@@ -485,6 +485,8 @@ hi cCustomClass guifg=#00FF00
 
 let b:current_syntax = "c"
 
+source $VIMRUNTIME/syntax/ifdef.vim
+
 unlet s:ft
 
 let &cpo = s:cpo_save

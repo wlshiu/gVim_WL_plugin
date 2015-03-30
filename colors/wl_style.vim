@@ -164,6 +164,6 @@ hi link PreCondit       identifier
 "/***************************************************************
 "* matchparen
 "***************************************************************/
-hi MatchParen cterm=none ctermbg=blue ctermfg=magenta guifg=magenta guibg=#FFDB72
+" hi MatchParen cterm=none ctermbg=blue ctermfg=magenta guifg=magenta guibg=#FFDB72
 
 
