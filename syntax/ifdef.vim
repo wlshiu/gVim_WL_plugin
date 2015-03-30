@@ -359,22 +359,24 @@ fun! IfdefLoad()
   endwhile
 endfun
 
+hi fadeout      ctermfg=Black guifg=#585858      gui=none
+
 "  hi default ifdefIfZero term=bold ctermfg=1 gui=italic guifg=DarkSeaGreen
-hi default link ifdefIfZero                     comment
+hi default link ifdefIfZero                     fadeout
 " hi default link ifdefOutsideNeutral             comment
-hi default link ifdefCommentAtEnd               comment
-hi default link ifdefUndefined                  comment
-hi default link ifdefInUndefinedIf              comment
-hi default link ifdefElseInDefinedToUndefined   comment
+hi default link ifdefCommentAtEnd               fadeout
+hi default link ifdefUndefined                  fadeout
+hi default link ifdefInUndefinedIf              fadeout
+hi default link ifdefElseInDefinedToUndefined   fadeout
 hi default link ifdefNeutralDefine              PreCondit
 hi default link ifdefNeutralPreProc             PreProc
 hi default link ifdefElseInDefinedNeutral       PreCondit
-hi default link ifdefElseInUndefinedNeutral     comment
-hi default link ifdefInBadPreCondit             comment
-hi default link ifdefInUndefinedComment         comment
-hi default link ifdefOutPreCondit               comment
+hi default link ifdefElseInUndefinedNeutral     fadeout
+hi default link ifdefInBadPreCondit             fadeout
+hi default link ifdefInUndefinedComment         fadeout
+hi default link ifdefOutPreCondit               fadeout
 hi default link ifdefPreCondit1                 PreCondit
-hi default link ifdefPreConditBad               comment
+hi default link ifdefPreConditBad               fadeout
 hi default link ifdefPreCondit3                 ifdefPreCondit1
 hi default link ifdefPreCondit4                 ifdefPreCondit1
 hi default link ifdefPreCondit5                 ifdefPreCondit1
