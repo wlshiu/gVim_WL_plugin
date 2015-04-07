@@ -19,6 +19,10 @@
 
 
 ================== Hot key ===========================
+----- generate myself c header pattern -----------
+:edit your_file_name
+:GenHeader      => in wl_doc.vim
+
 ----- 取代 -----------
 取代字尾 ^M 字符
 :%s/\r//g
