@@ -228,15 +228,22 @@ ex.
 \adec
     一樣用 visual mode 選取想要對齊的區域，輸入 \adec。
 
---------- EnhancedCommentify -------------
-進visual mode選取一段文字，然後按下
+--------- NERD Commenter -------------
+在Normal或者Visual 模式下：
+<leader>ca,         在當前行尾添加註解符，並進入Insert模式
+<leader>cc,         註解當前行
+<leader>cl,         註解當前行
+<leader>cu,         取消註解
+<leader>c<Spaces>,  切換註釋/非註釋狀態
+<leader>cy,         將選擇的部份做區塊註解
+<leader>cs,         以"性感"的方式註解
+<leader>cA,         在可選的註解方式之間切換，比如C/C++ 的塊註釋/* */和行註釋//
 
-"\x" (反斜線+x)
+n + <leader>cl, 註解cursor以下 n 行
 
-這些文字就會全部被註解掉了.
-取消註解, 同樣地選取起來, 再按一下"\x"就可以了.
-
-也可以用"\c", 會自動跳到下一行.
+Normal模式下，幾乎所有命令前面都可以指定行數
+Visual模式下執行命令，會對選中的特定區塊進行註釋/反註釋
+ps.各命令<leader>是可以自己設置的，通常是',' 或 '\'.
 
 
 --------- cctree -------------
