@@ -207,35 +207,50 @@ nmap \rt <Esc>:retab <CR>
 
 "// jump to line start/end
 nmap ms <Home>
-nmap me <End>
+nmap mt <End>
+
+" set plug-in help file path
+nmap hp <Esc>:helptags $VIMRUNTIME\doc <CR>
 "/***************************************************************
-"* taglist setting
+"* taglist/tagbar setting
 "***************************************************************/
-"let ctags='$VIMRUNTIME\ctags.exe'
-"// 設定ctags.exe路徑
-"let Tlist_Ctags_Cmd='ctags.exe'
+if 0
+" ----------- taglist ---------------------
+    "let ctags='$VIMRUNTIME\ctags.exe'
+    "// 設定ctags.exe路徑
+    "let Tlist_Ctags_Cmd='ctags.exe'
 
-"// 設定 wnd寬度
-let Tlist_WinWidth = 32
+    "// 設定 wnd寬度
+    let Tlist_WinWidth = 32
 
-"// 開檔後自動 update
-let Tlist_Auto_Update=1
+    "// 開檔後自動 update
+    let Tlist_Auto_Update=1
 
-"// 只 show一個 file的 tag
-let Tlist_Show_One_File=1
+    "// 只 show一個 file的 tag
+    let Tlist_Show_One_File=1
 
-"// 在GVIM中 show menu
-let Tlist_Show_Menu=1
+    "// 在GVIM中 show menu
+    let Tlist_Show_Menu=1
 
-"// 隨 vim自動開啟 taglist
-let Tlist_Auto_Open=1
+    "// 隨 vim自動開啟 taglist
+    let Tlist_Auto_Open=1
 
-"// 在背景 always解析 tag
-let Tlist_Process_File_Always=1
+    "// 在背景 always解析 tag
+    let Tlist_Process_File_Always=1
 
-"// hot key
-nmap tl :TlistToggle<CR>
+    "// hot key
+    nmap tl :TlistToggle<CR>
 
+else
+" ----------- taglist ---------------------
+    let g:tagbar_left = 1
+    let g:tagbar_sort = 0
+    let g:tagbar_autoshowtag = 1
+    let g:tagbar_width = 35
+    let g:tagbar_autoopen = 1
+    "// hot key
+    nmap tl :TagbarToggle<CR>
+endif
 "/***************************************************************
 "* NERD Tree setting
 "***************************************************************/
