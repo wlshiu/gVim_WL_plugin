@@ -2,7 +2,8 @@ function! OpenWlDoc()
     exec 'sp' $VIMRUNTIME . '/plugin/doc/wl_doc.txt'
 endfunction
 
-command! WlDoc :call OpenWlDoc()
+" command! WlDoc :call OpenWlDoc()
+command! WlDoc :helpgrep wl_doc.txt
 
 
 func SetCopyright()

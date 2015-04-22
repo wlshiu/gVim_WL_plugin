@@ -1,67 +1,58 @@
-*wl_doc.txt*	For Vim version 7.3.
+*wl_doc.txt*    For Vim version 7.3.
 
-            My hotkey
-================= shell cmd ==========================
-# 文件瀏覽
-:Ex : 開啟目錄瀏覽器，注意首字母E是大寫的
-:Sex : 在一個分割的窗口中開啟目錄瀏覽器
-:ls : 顯示當前buffer的情況
-:cd .. : 進入父目錄
-:args : 顯示目前打開的文件
-:lcd %:p:h : 更改到當前文件所在的目錄
- # 譯釋：lcd是緊緊改變當前窗口的工作路徑，% 是代表當前文件的文件名,
- # 加上 :p擴展成全名（就是帶了路徑），加上 :h析取出路徑
+    My Note
+==============================================================================
+Contents
+    shell cmd..........................|shell-cmd|
+    hot key........................... |hotkey|
+    plug-in............................|plug-in|
+    misc...............................|misc|
 
-:lcd %:h		,切換work directory到目前file的目錄
+==============================================================================
+SHELL CMD                                   *shell-cmd*
 
-:cw                 ,秀出 quickFixf視窗
+:Ex             開啟目錄瀏覽器，注意首字母E是大寫的
 
-====================================
-special characters list of Vim key
-<BS>           Backspace
-<Tab>          Tab
-<CR>           Enter
-<Enter>        Enter
-<Return>       Enter
-<Esc>          Escape
-<Space>        Space
-<Up>           Up arrow
-<Down>         Down arrow
-<Left>         Left arrow
-<Right>        Right arrow
-<F1> - <F12>   Function keys 1 to 12
-#1, #2..#9,#0  Function keys F1 to F9, F10
-<Insert>       Insert
-<Del>          Delete
-<Home>         Home
-<End>          End
-<PageUp>       Page-Up
-<PageDown>     Page-Down
-<bar>          the '|' character, which otherwise needs to be escaped '\|'
+:Sex            在一個分割的窗口中開啟目錄瀏覽器
 
-================== Hot key ===========================
------ generate myself c header pattern -----------
-:edit your_file_name
-:GenHeader      => in wl_doc.vim
+:ls             顯示當前buffer的情況
 
------ 取代 -----------
-取代字尾 ^M 字符
-:%s/\r//g
+:cd ..          進入父目錄
 
-刪除字尾空白
-:%s/\s\+$//g
+:args           顯示目前打開的文件
 
-"// replace pre-existing tabs
-nmap \rt <Esc>:retab <CR>
+:lcd %:p:h      更改到當前文件所在的目錄
+                譯釋：lcd是緊緊改變當前窗口的工作路徑，% 是代表當前文件的文件名,
+                加上 :p擴展成全名（就是帶了路徑），加上 :h析取出路徑
 
------ 區塊註解 -----------
+:lcd %:h        切換work directory到目前file的目錄
+
+:cw             秀出 quickFixf視窗
+
+:%s/\r//g       取代字尾 ^M 字符
+
+:%s/\s\+$//g    刪除字尾空白
+
+==============================================================================
+HOTKEY                                       *hotkey*
+
+-------------- *generate myself c header pattern*
+:edit [{your_file_name}]
+
+:GenHeader                      defined in wl_doc.vim
+
+nmap \rt <Esc>:retab <CR>       replace pre-existing tabs
+
+
+-------------- *區塊註解*
 於控制選項(ESC下), 游標移動至要註解的開頭第一個字
 按Ctrl-V, 接著往下選取要註解的區塊
 按大寫I插入. 插入註解符號(如’, //, #)
 最後, 按Esc, 返回控制選項
 ps. windows環境下, 需先取消預設 hotkey ctrl-v = 貼上 (unmap <C-V> in _vimrc)
 
------ 範圍選取 -----------
+
+-------------- *範圍選取*
 ※以下看到的 "|" 是 or 的意思
 v | c | d  +  i | a  +  { | [ | " | '
 
@@ -78,7 +69,34 @@ di" 移除最小範圍的""部份(但不包含"")
 ci( 修改最小範圍的()部份(但不包含())
 va{= 選取最小範圍的{}部份並排列整齊
 
------ ctags/cscope --------
+
+-------------- *Wind Contorl*
+<C-w> n 新建一個窗口並創建一個新文件
+<C-w> s 新建一個水平窗口並打開當前文件
+<C-w> v 新建一個垂直窗口並打開當前文件
+<C-w> c 關閉當前窗口
+<C-w> q 離開 vim，( :q)
+<C-w> <C-w>      順序切換窗口
+<C-w> o 關閉其他窗口只留下當前窗口
+<C-w> j 切換到下一個窗口
+<C-w> k 切換到上一個窗口
+<C-w> r 上下窗口調換位置
+<C-w> - 減小當前窗口高度
+<C-w> + 增加當前窗口高度
+:res -n 減小當前窗口高度n行
+:res +n 增加當前窗口高度n行
+
+-------------- *windows下GVim的塊選擇方式*
+On Unix:
+    Type <C-V> and select your block of text.
+On Windows with Gvim
+    Enter Visual Mode"v" then <C-q>.
+
+
+==============================================================================
+PLUG-IN                                      *plug-in*
+
+-------------- *ctags/cscope*
 :!ctags -R
  or
 :!ctags -L cscope.files (create by find cmd)
@@ -123,14 +141,16 @@ step 1. 建立搜尋file list (generate cscope.files)
 setp 2. 開始建立索引 cscope.out
     :cscope -bkq -i cscope.files
 
------ A plug-in --------
-開啟對應的 header file
-:A 	    切換到 h file
-:AS 	橫向分割開啟 h file
-:AV 	縱向分割開啟 h file
-:AT 	新tab 開啟 h file
 
------ FuzzyFinder -----------
+-------------- *A.vim*
+開啟對應的 header file
+:A      切換到 h file
+:AS     橫向分割開啟 h file
+:AV     縱向分割開啟 h file
+:AT     新tab 開啟 h file
+
+
+-------------- *FuzzyFinder*
 : FufFile
     in search bar
     "**\" recursive
@@ -160,12 +180,14 @@ FuzzyFinder 提供的 cmd
   Ctrl-k          開啟該檔案到垂直分割視窗
   Ctrl-l          開啟檔案至新分頁
 
------ AutoComplPop -----------
+
+-------------- *AutoComplPop*
 在補全視窗選擇 item
 <C-n>
 <C-p>
 
------ Buffer explorer --------
+
+-------------- *BufferExplorer*
 In "normal mode"
 
 \be : full screen buffer browser
@@ -173,43 +195,25 @@ In "normal mode"
 \bs : horizontal split screen buffer browser
 q   : exit
 
------ MiniBufExplorer --------
+
+-------------- *MiniBufExplorer*
 :bn   打開當前buffer的下一個buffer
 :bp   打開當前buffer的前一個buffer
 :b"num"   打開指定的buffer，"num"指的是buffer開始的那個數字
 
------ Calzone --------
+
+-------------- *Calzone*
 :Calzone    顯示 #ifdef #endif 的 block zone
 
------ Wind Contorl --------
-<C-w> n 新建一個窗口並創建一個新文件
-<C-w> s 新建一個水平窗口並打開當前文件
-<C-w> v 新建一個垂直窗口並打開當前文件
-<C-w> c 關閉當前窗口
-<C-w> q 離開 vim，( :q)
-<C-w> <C-w>      順序切換窗口
-<C-w> o 關閉其他窗口只留下當前窗口
-<C-w> j 切換到下一個窗口
-<C-w> k 切換到上一個窗口
-<C-w> r 上下窗口調換位置
-<C-w> - 減小當前窗口高度
-<C-w> + 增加當前窗口高度
-:res -n 減小當前窗口高度n行
-:res +n 增加當前窗口高度n行
 
---------- windows下GVim的塊選擇方式 -------------
-On Unix:
-    Type <C-V> and select your block of text.
-On Windows with Gvim
-    Enter Visual Mode"v" then <C-q>.
-
---------- tabular -------------
+-------------- *tabular*
 :Tab / + "symbol"
 ex.
     :Tab /=         對齊 =
     :Tab /:         對齊 :
 
---------- Align -------------
+
+-------------- *Align*
 ps. 造成有用leader key "\" 的 hotkey 都變慢
 處理文字對齊的問題，比如 source code 的宣告，賦值，或是註解等等。
 這邊介紹比較簡單的使用方式，詳情請參考說明檔 (:help Align)
@@ -228,7 +232,8 @@ ex.
 \adec
     一樣用 visual mode 選取想要對齊的區域，輸入 \adec。
 
---------- NERD Commenter -------------
+
+-------------- *NERD-Commenter*
 在Normal或者Visual 模式下：
 <leader>ca,         在當前行尾添加註解符，並進入Insert模式
 <leader>cc,         註解當前行
@@ -246,12 +251,13 @@ Visual模式下執行命令，會對選中的特定區塊進行註釋/反註釋
 ps.各命令<leader>是可以自己設置的，通常是',' 或 '\'.
 
 
---------- cctree -------------
+-------------- *cctree*
 Displays hierarchical call-trees
 c. : 本函數會使用的function tree
 c, : reference 本函數的function
 
---------- Trinity -------------
+
+-------------- *Trinity*
 管理Source Explorer/Tag List/NERD_tree的 layout
 Source Explorer     自動顯示定義
 
@@ -260,11 +266,13 @@ Source Explorer     自動顯示定義
 <C-F10>: Open and close the taglist.vim separately
 <C-F11>: Open and close the NERD_tree.vim separately
 
---------- Mark -------------
+
+-------------- *Mark*
 \m              highlight selected word
 :MarkClear      clear all mark
 
---------- DrawIt -------------
+
+-------------- *DrawIt*
    \di to start DrawIt and
    \ds to stop  DrawIt.
 
@@ -304,4 +312,32 @@ Supported Features
    \pa ...      like \ra ... \rz, except that blanks are considered
                 to be transparent
 
+==============================================================================
+MISC                                         *misc*
 
+    *special characters list of Vim key* >
+        <BS>           Backspace
+        <Tab>          Tab
+        <CR>           Enter
+        <Enter>        Enter
+        <Return>       Enter
+        <Esc>          Escape
+        <Space>        Space
+        <Up>           Up arrow
+        <Down>         Down arrow
+        <Left>         Left arrow
+        <Right>        Right arrow
+        <F1> - <F12>   Function keys 1 to 12
+        #1, #2..#9,#0  Function keys F1 to F9, F10
+        <Insert>       Insert
+        <Del>          Delete
+        <Home>         Home
+        <End>          End
+        <PageUp>       Page-Up
+        <PageDown>     Page-Down
+        <bar>          the '|' character, which otherwise needs to be escaped '\|'
+<
+
+
+==============================================================================
+ vim: tw=78 ts=8 sw=8 sts=8 noet ft=help
