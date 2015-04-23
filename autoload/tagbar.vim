@@ -1646,6 +1646,8 @@ function! s:OpenWindow(flags)
         let tagbarwinnr = bufwinnr('__Tagbar__')
         execute tagbarwinnr . 'wincmd w'
     endif
+
+    call s:HighlightTag()
 endfunction
 
 " s:InitWindow() {{{2
@@ -2523,11 +2525,11 @@ function! s:HighlightTag()
     " Don't highlight the tag again if it's the same one as last time.
     " This prevents the Tagbar window from jumping back after scrolling with
     " the mouse.
-    if tagline == s:last_highlight_tline
-        return
-    else
+    " if tagline == s:last_highlight_tline
+        " return
+    " else
         let s:last_highlight_tline = tagline
-    endif
+    " endif
 
     let eventignore_save = &eventignore
     set eventignore=all
