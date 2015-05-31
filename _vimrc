@@ -398,12 +398,16 @@ nmap <A-s> :FufTag<CR>
 "/***************************************************************
 "* CtrlP
 "***************************************************************/
+let gfind='$VIMRUNTIME\gfind.exe'
 let g:ctrlp_map = '<A-w>'
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](\.git|\.hg|\.svn|IAR|Debug|Release)$',
-  \ 'file': '\v\.(exe|so|dll|o|out|obj|bin)$',
+  \ 'file': '\v\.(exe|so|dll|o|out|obj|bin|a)$',
   \ }
+
+let g:ctrlp_user_command = 'gfind %s -type f'        " MacOSX/Linux
+" let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 
 "/***************************************************************
 "* cctree
