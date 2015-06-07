@@ -86,6 +86,8 @@ if !exists("syntax_on")
     syntax on
 endif
 
+set fileformat=unix
+
 set guifont=monaspace\ 12
 colorscheme wl_style
 
@@ -318,6 +320,7 @@ nmap <A-n> :NERDTreeToggle<CR>
 "  "map <S-g> <Esc>:call GenTag()<CR> "// terminal mode can use Alt, so change Shift
 
 let cscope='$VIMRUNTIME\cscope.exe'
+let gfind='$VIMRUNTIME\gfind.exe'
 function Do_CsTag()
     let dir = getcwd()
     if filereadable("tags")
@@ -356,17 +359,20 @@ function Do_CsTag()
             return
         endif
     endif
+
+    if(has("win32"))
+        silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hh >> cscope.files"
+    else
+        silent! execute "!gfind . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+    endif
+
     if(executable('ctags'))
         "silent! execute "!ctags -R --c-types=+p --fields=+S *"
-        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+        " silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+        silent! execute "!ctags --c++-kinds=+p --fields=+iaS --extra=+q -L cscope.files"
     endif
-    if(executable('cscope') && has("cscope") )
-        if(has("win32"))
-            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
-        else
-            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
-        endif
-        silent! execute "!cscope -b"
+    if has("cscope")
+        execute "!cscope -bkq -i cscope.files"
         execute "normal :"
         if filereadable("cscope.out")
             execute "cs add cscope.out"
@@ -400,13 +406,15 @@ nmap <A-s> :FufTag<CR>
 "***************************************************************/
 let gfind='$VIMRUNTIME\gfind.exe'
 let g:ctrlp_map = '<A-w>'
+"let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_max_files = 100000
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](\.git|\.hg|\.svn|IAR|Debug|Release)$',
-  \ 'file': '\v\.(exe|so|dll|o|out|obj|bin|a)$',
+  \ 'file': '\v\.(exe|so|dll|o|a|out|obj|bin|cmd)$',
   \ }
 
-let g:ctrlp_user_command = 'gfind %s -type f'        " MacOSX/Linux
+let g:ctrlp_user_command = "gfind %s -type f"        " MacOSX/Linux
 " let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 
 "/***************************************************************
@@ -486,6 +494,10 @@ function! ShowSignColumn()
   execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 endfunc
 au BufRead,BufNewFile * call ShowSignColumn()
+
+"/***************************************************************
+"* VisualMark
+"***************************************************************/
 
 "/***************************************************************
 "* AStyle
