@@ -252,7 +252,7 @@ if 0
     nmap tl :TlistToggle<CR>
 
 else
-" ----------- taglist ---------------------
+" ----------- tagbar ---------------------
     let g:tagbar_left = 1
     let g:tagbar_sort = 0
     let g:tagbar_autoshowtag = 1
@@ -418,20 +418,21 @@ nmap <A-s> :FufTag<CR>
 "* CtrlP
 "***************************************************************/
 let gfind='$VIMRUNTIME\gfind.exe'
-let g:ctrlp_map = '<A-w>'
-"let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_max_files = 100000
+" let g:ctrlp_map = '<A-w>'
+let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](\.git|\.hg|\.svn|IAR|Debug|Release)$',
   \ 'file': '\v\.(exe|so|dll|o|a|out|obj|bin|cmd)$',
   \ }
 
-if(has("win32"))
-    let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-else
-    let g:ctrlp_user_command = 'gfind %s -type f'       " MacOSX/Linux
-endif
+" if(has("win32"))
+    " let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d /o-n *.h *.hh *.c *.cpp' " Windows
+" else
+    let g:ctrlp_user_command = 'gfind %s -type f -name "*.h" -o -name "*.hh" -o -name "*.c" -o -name "*.cpp"'       " MacOSX/Linux
+" endif
 
 "/***************************************************************
 "* buffergator
@@ -520,6 +521,11 @@ au BufRead,BufNewFile * call ShowSignColumn()
 "* VisualMark
 "***************************************************************/
 
+"/***************************************************************
+"* unite
+"***************************************************************/
+nmap <A-w> <Esc>:Unite -start-insert file<CR>
+let g:unite_source_file_rec_max_depth =10
 "/***************************************************************
 "* AStyle
 "***************************************************************/
