@@ -152,7 +152,15 @@ set noswapfile
 
 "// 檔案編碼
 set encoding=utf-8
-"set fileencodings=utf-8,cp950
+set fileencodings=utf-8,cp950
+set fileencoding=utf-8
+set termencoding=utf-8
+"// 解決菜單亂碼
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+"// 解決consle輸出亂碼
+language messages zh_tw.utf-8
+
 
 "// 視窗滾動保留列數
 set scrolloff=3
