@@ -337,17 +337,7 @@ function Do_CsTag()
     if has("cscope")
         silent! execute "cs kill -1"
     endif
-    if filereadable("cscope.files")
-        if(has("win32"))
-            let csfilesdeleted=delete(dir."\\"."cscope.files")
-        else
-            let csfilesdeleted=delete("./"."cscope.files")
-        endif
-        if(csfilesdeleted!=0)
-            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
-            return
-        endif
-    endif
+
     if filereadable("cscope.out")
         if(has("win32"))
             let csoutdeleted=delete(dir."\\"."cscope.out")
@@ -360,10 +350,24 @@ function Do_CsTag()
         endif
     endif
 
-    if(has("win32"))
-        silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hh >> cscope.files"
-    else
-        silent! execute "!gfind . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java'> cscope.files"
+    " if filereadable("cscope.files")
+    "     if(has("win32"))
+    "         let csfilesdeleted=delete(dir."\\"."cscope.files")
+    "     else
+    "         let csfilesdeleted=delete("./"."cscope.files")
+    "     endif
+    "     if(csfilesdeleted!=0)
+    "         echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
+    "         return
+    "     endif
+    " endif
+
+    if !filereadable("cscope.files")
+        if(has("win32"))
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hh > cscope.files"
+        else
+            silent! execute "!gfind . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java'> cscope.files"
+        endif
     endif
 
     if(executable('ctags'))
@@ -421,7 +425,10 @@ else
     let g:ctrlp_user_command = 'gfind %s -type f'       " MacOSX/Linux
 endif
 
-
+"/***************************************************************
+"* buffergator
+"***************************************************************/
+let g:buffergator_viewport_split_policy="T"
 
 "/***************************************************************
 "* cctree
