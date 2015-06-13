@@ -29,9 +29,25 @@ SHELL CMD                                   *shell-cmd*
 
 :cw             秀出 quickFixf視窗
 
-:%s/\r//g       取代字尾 ^M 字符
+:%s/\r//g       取代字尾 ^M 字符 >
+    nmap \dm <Esc>:%s/\r//g <CR>
+<
 
-:%s/\s\+$//g    刪除字尾空白
+:%s/\s\+$//g    刪除字尾空白 >
+    nmap \de <Esc>:%s/\s\+$//g <CR>
+<
+
+replace pre-existing tabs >
+    nmap \rt <Esc>:retab <CR>
+<
+
+when press \ + Enter, the cursor break context to next line. >
+    nmap \<CR>  i<CR><ESC>
+<
+
+when press \ + Space, insert white spec at cursor. >
+    nmap \<SPACE>  i<SPACE><ESC>
+<
 
 ==============================================================================
 HOTKEY                                       *hotkey*
@@ -40,9 +56,6 @@ HOTKEY                                       *hotkey*
 :edit [{your_file_name}]
 
 :GenHeader                      defined in wl_doc.vim
-
-nmap \rt <Esc>:retab <CR>       replace pre-existing tabs
-
 
 -------------- *區塊註解*
 於控制選項(ESC下), 游標移動至要註解的開頭第一個字
