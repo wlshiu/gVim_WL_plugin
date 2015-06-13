@@ -81,7 +81,7 @@ endfunction
 "/***************************************************************
 "* personal style setting
 "***************************************************************/
-"// ³]¸m­Ó¤HÅã¥Ü­·®æ
+"// è¨­ç½®å€‹äººé¡¯ç¤ºé¢¨æ ¼
 if !exists("syntax_on")
     syntax on
 endif
@@ -91,70 +91,70 @@ set fileformat=unix
 set guifont=monaspace\ 12
 colorscheme wl_style
 
-"//³]¸mµøµ¡¤j¤p
+"//è¨­ç½®è¦–çª—å¤§å°
 set lines=42 columns=140
 
-"//³]¸mcmd window size
+"//è¨­ç½®cmd window size
 set cmdheight=2
 
-"// Åã¥Ü¦æ¸¹
+"// é¡¯ç¤ºè¡Œè™Ÿ
 set number
 
-"// ¥Î space ¥N´À tab
+"// ç”¨ space ä»£æ›¿ tab
 set expandtab
 
-"// ³]¸mTAB¼e«×
+"// è¨­ç½®TABå¯¬åº¦
 set tabstop=4
 
-"// ¦Û°ÊÁY±Æªø«×
+"// è‡ªå‹•ç¸®æ’é•·åº¦
 set shiftwidth=4
 
-" ´¼¼z¹ï»ô¤è¦¡
+" æ™ºæ…§å°é½Šæ–¹å¼
 set smartindent
 
-"// ¦Û°ÊÁY±Æ
+"// è‡ªå‹•ç¸®æ’
 set autoindent
 
-"// ³v¼h¦V¤W·j´M tags file
+"// é€å±¤å‘ä¸Šæœå°‹ tags file
 set tags=tags;
 
-"// ¦Û°Ê¤Á´«working directory, ¥Hcurrent file ©Ò¦b¥Ø¿ı¬°¥D
+"// è‡ªå‹•åˆ‡æ›working directory, ä»¥current file æ‰€åœ¨ç›®éŒ„ç‚ºä¸»
 "set autochdir
 
-"// ³]©wª¬ºA¦C
+"// è¨­å®šç‹€æ…‹åˆ—
 set laststatus=2
 
-"// statusline ®æ¦¡
+"// statusline æ ¼å¼
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ Ln:\ %l/%L:%c
 
-"// ¶i¤Jinsert mode§ïÅÜª¬ºA¦CÃC¦â (vim7.0 ¥H¤W)
+"// é€²å…¥insert modeæ”¹è®Šç‹€æ…‹åˆ—é¡è‰² (vim7.0 ä»¥ä¸Š)
 if version >= 700
     au InsertEnter * hi StatusLine guibg=#818D29 guifg=#FCFCFC gui=none
     au InsertLeave * hi StatusLine guibg=#EEEEEE guifg=#363636 gui=none
 endif
 
-"// Åã¥Ü²{¦bªº¼Ò¦¡
+"// é¡¯ç¤ºç¾åœ¨çš„æ¨¡å¼
 set showmode
 
-"// ¾Ş§@¹Lµ{¦³½Ä¬ğ®É¡A¥H©ú½Tªº¤å¦r¨Ó¸ß°İ
+"// æ“ä½œéç¨‹æœ‰è¡çªæ™‚ï¼Œä»¥æ˜ç¢ºçš„æ–‡å­—ä¾†è©¢å•
 set confirm
 
-"// Alt default¬O°tµ¹ Menuªº²Ä¤@­Ó©³½u¿ï¶µ, ±N Alt¹w³] disable
+"// Alt defaultæ˜¯é…çµ¦ Menuçš„ç¬¬ä¸€å€‹åº•ç·šé¸é …, å°‡ Alté è¨­ disable
 set winaltkeys=no
 
-"// ¤£³Æ¥÷
+"// ä¸å‚™ä»½
 set nobackup
 set nowritebackup
 set noswapfile
 
-"// ¦Û°Ê´«¦æ¿ï¶µ
+"// è‡ªå‹•æ›è¡Œé¸é …
 "set nowrap
 
-"// ÀÉ®×½s½X
-"set encoding=utf-8
+"// æª”æ¡ˆç·¨ç¢¼
+set encoding=utf-8
 "set fileencodings=utf-8,cp950
 
-"// µøµ¡ºu°Ê«O¯d¦C¼Æ
+"// è¦–çª—æ»¾å‹•ä¿ç•™åˆ—æ•¸
 set scrolloff=3
 
 "// Set to auto read when a file is changed from the outside
@@ -163,10 +163,10 @@ set autoread
 "// Ignore case when searching
 set ignorecase
 
-"// ¤£¹ï¤Ç°tªº¬A¸¹¶i¦æ°ª«GÅã¥Ü
+"// ä¸å°åŒ¹é…çš„æ‹¬è™Ÿé€²è¡Œé«˜äº®é¡¯ç¤º
 let loaded_matchparen=1
 
-"// ¨ú®ø ctrl+v ©w¸q
+"// å–æ¶ˆ ctrl+v å®šç¾©
 unmap <C-V>
 
 set hlsearch
@@ -177,9 +177,9 @@ set showmatch
 "/***************************************************************
 "* folding setting
 "***************************************************************/
-"set foldmethod=syntax   "// ¨Ì¤º®e
-"set foldmethod=marker    "// ¨Ì¦Û­q
-"set foldmethod=indent  "// ¨ÌÁY±Æ
+"set foldmethod=syntax   "// ä¾å…§å®¹
+"set foldmethod=marker    "// ä¾è‡ªè¨‚
+"set foldmethod=indent  "// ä¾ç¸®æ’
 set foldnestmax=3
 set foldcolumn=3
 
@@ -219,25 +219,25 @@ nmap hp <Esc>:helptags $VIMRUNTIME\doc <CR>
 if 0
 " ----------- taglist ---------------------
     "let ctags='$VIMRUNTIME\ctags.exe'
-    "// ³]©wctags.exe¸ô®|
+    "// è¨­å®šctags.exeè·¯å¾‘
     "let Tlist_Ctags_Cmd='ctags.exe'
 
-    "// ³]©w wnd¼e«×
+    "// è¨­å®š wndå¯¬åº¦
     let Tlist_WinWidth = 32
 
-    "// ¶}ÀÉ«á¦Û°Ê update
+    "// é–‹æª”å¾Œè‡ªå‹• update
     let Tlist_Auto_Update=1
 
-    "// ¥u show¤@­Ó fileªº tag
+    "// åª showä¸€å€‹ fileçš„ tag
     let Tlist_Show_One_File=1
 
-    "// ¦bGVIM¤¤ show menu
+    "// åœ¨GVIMä¸­ show menu
     let Tlist_Show_Menu=1
 
-    "// ÀH vim¦Û°Ê¶}±Ò taglist
+    "// éš¨ vimè‡ªå‹•é–‹å•Ÿ taglist
     let Tlist_Auto_Open=1
 
-    "// ¦b­I´º always¸ÑªR tag
+    "// åœ¨èƒŒæ™¯ alwaysè§£æ tag
     let Tlist_Process_File_Always=1
 
     "// hot key
@@ -258,13 +258,13 @@ endif
 "***************************************************************/
 let NERDTreeWinPos='right'
 
-"// ¶}ÀÉ«á¦Û°Ê®ø¥¢wnd
+"// é–‹æª”å¾Œè‡ªå‹•æ¶ˆå¤±wnd
 let NERDTreeQuitOnOpen=1
 
-"// ¨Ï¥ÎNERD Tree´£¨Ñªº¦â±m
+"// ä½¿ç”¨NERD Treeæä¾›çš„è‰²å½©
 let NERDChristmasTree=1
 
-"// highlight ¥Ø«e cursorªº¦C
+"// highlight ç›®å‰ cursorçš„åˆ—
 let NERDTreeHighlightCursorline=1
 
 "nmap <S-n> :NERDTreeToggle<CR>
@@ -280,14 +280,14 @@ nmap <A-n> :NERDTreeToggle<CR>
 "/***************************************************************
 "* Cscope setting
 "***************************************************************/
-" ¤£¨Ï¥Î quickFix window
+" ä¸ä½¿ç”¨ quickFix window
 "set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 
-"  "//³]©w cscope.exe ¸ô®|
+"  "//è¨­å®š cscope.exe è·¯å¾‘
 "  "let cscope='$VIMRUNTIME\cscope.exe'
 "
-"  "// ¦P®É·j¯Á ctags©M cscope¥B¥H cscopeÀu¥ı
+"  "// åŒæ™‚æœç´¢ ctagså’Œ cscopeä¸”ä»¥ cscopeå„ªå…ˆ
 "  if has("cscope")
 "      set cscopequickfix=s-,c-,d-,i-,t-,e-
 "      set csto=0
@@ -363,16 +363,17 @@ function Do_CsTag()
     if(has("win32"))
         silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hh >> cscope.files"
     else
-        silent! execute "!gfind . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+        silent! execute "!gfind . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java'> cscope.files"
     endif
 
     if(executable('ctags'))
-        "silent! execute "!ctags -R --c-types=+p --fields=+S *"
+        " silent! execute "!ctags -R --c-types=+p --fields=+S *"
         " silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
         silent! execute "!ctags --c++-kinds=+p --fields=+iaS --extra=+q -L cscope.files"
     endif
-    if has("cscope")
-        execute "!cscope -bkq -i cscope.files"
+
+    if(executable('cscope') && has("cscope") )
+        silent! execute "!cscope -bkq -i cscope.files"
         execute "normal :"
         if filereadable("cscope.out")
             execute "cs add cscope.out"
@@ -388,7 +389,7 @@ map <A-g> <Esc>:call Do_CsTag() <CR>
 "/***************************************************************
 "* QuickFix (default plug-in)
 "***************************************************************/
-"//ª½±µ¦V«e©Î¦V«á¸õ¨ì quickFix wind¶µ¥Øªº¦ì¸m
+"//ç›´æ¥å‘å‰æˆ–å‘å¾Œè·³åˆ° quickFix windé …ç›®çš„ä½ç½®
 nmap <F6> :cn<CR>
 nmap <F7> :cp<CR>
 
@@ -414,13 +415,18 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|o|a|out|obj|bin|cmd)$',
   \ }
 
-let g:ctrlp_user_command = "gfind %s -type f"        " MacOSX/Linux
-" let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+if(has("win32"))
+    let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+else
+    let g:ctrlp_user_command = 'gfind %s -type f'       " MacOSX/Linux
+endif
+
+
 
 "/***************************************************************
 "* cctree
 "***************************************************************/
-"key CCTreeLoadDB «á enter ¦Û°Ê¿ï¤W cscope.out
+"key CCTreeLoadDB å¾Œ enter è‡ªå‹•é¸ä¸Š cscope.out
 let g:CCTreeCscopeDb = "cscope.out"
 " set hot key
 let g:CCTreeKeyTraceForwardTree = 'c.'
@@ -504,18 +510,18 @@ au BufRead,BufNewFile * call ShowSignColumn()
 "***************************************************************/
 let astyle='$VIMRUNTIME\astyle.exe'
 func CodeFormat()
-    "¨ú±ocursor©Ò¦b¦æ¸¹
+    "å–å¾—cursoræ‰€åœ¨è¡Œè™Ÿ
     let lineNum = line(".")
 
     if &filetype == 'java'
-        "°õ¦æ¥~³¡µ{§Çªº©R¥O
+        "åŸ·è¡Œå¤–éƒ¨ç¨‹åºçš„å‘½ä»¤
         exec "%! astyle -A2Lfpjk3NS\<CR>"
     else
-        "°õ¦æ¥~³¡µ{§Çªº©R¥O
+        "åŸ·è¡Œå¤–éƒ¨ç¨‹åºçš„å‘½ä»¤
         exec "%! astyle  -A1 -t4 -b -S -K -k3 -M40 -m0  -j -c -p\<CR>"
     endif
 
-    "ªğ¦^cursor©Ò¦b¦æ
+    "è¿”å›cursoræ‰€åœ¨è¡Œ
     exec lineNum
 endfunc
 
@@ -524,8 +530,8 @@ map <A-F8> <Esc>:call CodeFormat()<CR>
 
 
 " if exists(":Tabularize")
-  nmap \a= :Tabularize /=<CR>
-  vmap \a= :Tabularize /=<CR>
-  nmap \a<SPACE> :Tabularize / <CR>
-  vmap \a<SPACE> :Tabularize / <CR>
+  " nmap \a= :Tabularize /=<CR>
+  " vmap \a= :Tabularize /=<CR>
+  " nmap \a<SPACE> :Tabularize / <CR>
+  " vmap \a<SPACE> :Tabularize / <CR>
 " endif
