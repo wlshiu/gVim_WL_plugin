@@ -42,27 +42,32 @@ endfunction
 "***************************************************************/
 set diffexpr=MyDiff()
 function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            if empty(&shellxquote)
+                let l:shxq_sav = ''
+                set shellxquote&
+            endif
+            let cmd = '"' . $VIMRUNTIME . '\diff"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
     else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+      let cmd = $VIMRUNTIME . '\diff'
     endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+    if exists('l:shxq_sav')
+        let &shellxquote=l:shxq_sav
+    endif
 endfunction
 
 function! CurDir()
@@ -136,7 +141,7 @@ endif
 "// 顯示現在的模式
 set showmode
 
-"// 操作過程有衝突時，以明確的文字來詢問
+"// 操作過程有衝突時,以明確的文字來詢問
 set confirm
 
 "// Alt default是配給 Menu的第一個底線選項, 將 Alt預設 disable
@@ -182,6 +187,30 @@ set hlsearch
 "// highlights the matching braces
 set showmatch
 
+" 按 F8 可以切換是否高亮度顯示搜尋字串
+map <F8> :set hls!<BAR>set hls?<CR>
+
+"// diff setting
+if &diff
+    set cursorline
+    set wrap
+    hi CursorLine   ctermfg=Black ctermbg=206 guifg=Black guibg=206
+    hi diffLine     ctermfg=Black ctermbg=93 guifg=Black guibg=206
+
+    " 設定各種差異時,標示的顏色
+    " Add 代表新增的一行, Delete 代表刪除的一行,
+    " Change 代表有差異的一行,Text 代表有差異的這一行中,具有差異的部份
+    hi DiffAdd ctermfg=White ctermbg=21 guifg=White  guibg=21
+    " hi DiffDelete ctermfg=Grey ctermbg=DarkRed guifg=Grey
+    hi diffRemoved ctermfg=Grey ctermbg=Grey guifg=Grey guibg=Grey
+    hi DiffChange ctermfg=Black ctermbg=178 guifg=Black guibg=#FFCC22
+    hi DiffText ctermfg=Black ctermbg=222 guifg=Black guibg=#FFFF77
+
+    map <A-Down> ]c
+    map <A-UP>   [c
+else
+    set !cursorline
+endif
 "/***************************************************************
 "* folding setting
 "***************************************************************/
@@ -331,32 +360,32 @@ let cscope='$VIMRUNTIME\cscope.exe'
 let gfind='$VIMRUNTIME\gfind.exe'
 function Do_CsTag()
     let dir = getcwd()
-    if filereadable("tags")
-        if(has("win32"))
-            let tagsdeleted=delete(dir."\\"."tags")
-        else
-            let tagsdeleted=delete("./"."tags")
-        endif
-        if(tagsdeleted!=0)
-            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
-            return
-        endif
-    endif
+    " if filereadable("tags")
+    "     if(has("win32"))
+    "         let tagsdeleted=delete(dir."\\"."tags")
+    "     else
+    "         let tagsdeleted=delete("./"."tags")
+    "     endif
+    "     if(tagsdeleted!=0)
+    "         echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+    "         return
+    "     endif
+    " endif
     if has("cscope")
         silent! execute "cs kill -1"
     endif
 
-    if filereadable("cscope.out")
-        if(has("win32"))
-            let csoutdeleted=delete(dir."\\"."cscope.out")
-        else
-            let csoutdeleted=delete("./"."cscope.out")
-        endif
-        if(csoutdeleted!=0)
-            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
-            return
-        endif
-    endif
+    " if filereadable("cscope.out")
+    "     if(has("win32"))
+    "         let csoutdeleted=delete(dir."\\"."cscope.out")
+    "     else
+    "         let csoutdeleted=delete("./"."cscope.out")
+    "     endif
+    "     if(csoutdeleted!=0)
+    "         echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
+    "         return
+    "     endif
+    " endif
 
     " if filereadable("cscope.files")
     "     if(has("win32"))
@@ -381,7 +410,7 @@ function Do_CsTag()
     if(executable('ctags'))
         " silent! execute "!ctags -R --c-types=+p --fields=+S *"
         " silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
-        silent! execute "!ctags --c++-kinds=+p --fields=+iaS --extra=+q -L cscope.files"
+        silent! execute "!ctags --c++-kinds=+p --fields=+iaS --extra=+q --sort=yes -L cscope.files"
     endif
 
     if(executable('cscope') && has("cscope") )

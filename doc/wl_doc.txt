@@ -49,6 +49,16 @@ when press \ + Space, insert white spec at cursor. >
     nmap \<SPACE>  i<SPACE><ESC>
 <
 
+diff a.file b.file >
+    $ vim FILE_LEFT
+    :vertical diffsplit FILE_RIGHT
+<
+or >
+    $ vim -d FILE_LEFT FILE_RIGHT
+<
+or >
+    $ vimdiff FILE_LEFT FILE_RIGHT
+<
 ==============================================================================
 HOTKEY                                       *hotkey*
 
@@ -56,6 +66,34 @@ HOTKEY                                       *hotkey*
 :edit [{your_file_name}]
 
 :GenHeader                      defined in wl_doc.vim
+
+-------------- *diff*
+]c # 跳到下一個差異點 >
+    map <A-Down>
+<
+
+[c # 跳到前一個差異點 >
+    map <A-UP>
+<
+
+把 current file的內容複製到the other file, 可以使用 diff put命令 >
+    dp
+    :diffput
+<
+
+把the other file的內容複製到current file,可以使用 diff obtain命令  >
+    do
+    :diffget
+<
+
+撤銷修改，將光標移動到需要撤銷修改的文件窗口中，直接
+    <ESC> + u
+<
+
+在修改文件後，vimdiff會試圖自動來重新比較文件，來反映比較結果。
+但是也會有處理失敗的情況，這個時候需要手工來刷新比較結果 >
+    :diffupdate
+<
 
 -------------- *區塊註解*
 於控制選項(ESC下), 游標移動至要註解的開頭第一個字
