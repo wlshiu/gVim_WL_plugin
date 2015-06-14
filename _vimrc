@@ -209,7 +209,7 @@ if &diff
     map <A-Down> ]c
     map <A-UP>   [c
 else
-    set !cursorline
+    set cursorline!
 endif
 "/***************************************************************
 "* folding setting
