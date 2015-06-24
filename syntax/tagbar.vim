@@ -47,13 +47,15 @@ highlight default link TagbarNestedKind TagbarKind
 highlight default link TagbarScope      Title
 highlight default link TagbarType       Type
 
-highlight default mySpecialKey    guifg=#708090 ctermfg=darkcyan
+" hi default mySpecialKey    ctermfg=darkcyan guifg=#708090
+hi mySpecialKey ctermfg=77  guifg=#5fdf5f
 highlight default link TagbarSignature  mySpecialKey
 
 highlight default link TagbarPseudoID   NonText
 highlight default link TagbarFoldIcon   Statement
 
-highlight default myTagbarHighlight    guifg=#F4A460 ctermfg=Brown
+" hi default myTagbarHighlight    guifg=#F4A460 ctermfg=Brown
+hi default myTagbarHighlight    ctermfg=0 guifg=#000000 guibg=#afdf5f ctermbg=149
 highlight default link TagbarHighlight  myTagbarHighlight
 
 highlight default TagbarAccessPublic    guifg=Green ctermfg=Green

@@ -28,7 +28,7 @@ if version > 580
 endif
 let g:colors_name="wl_style"
 
-hi normal   guifg=gray guibg=grey17 gui=none
+hi normal   guifg=gray guibg=#2b2b2b gui=none
 
 "// alignctrl default
 "// alignctrl =p0 guifg guibg gui
@@ -48,7 +48,7 @@ hi moremsg      guifg=seagreen       gui=none
 hi nontext      guifg=cyan           gui=none
 hi question     guifg=springgreen    gui=none
 hi search       guifg=gray80         guibg=#445599  gui=none
-hi specialkey   guifg=cyan           gui=none
+hi specialkey   guifg=#4d4d4d                       gui=none
 hi statusline   guifg=black          guibg=#c2bfa5  gui=none
 hi statuslinenc guifg=grey           guibg=gray40   gui=none
 hi title        guifg=indianred      gui=none
@@ -107,7 +107,7 @@ hi Label        guifg=cyan           gui=none
 "// color terminal definitions
 hi normal       ctermfg=gray        ctermbg=darkgray
 hi cursor       ctermfg=black       ctermbg=yellow	 cterm=none
-hi specialkey   ctermfg=darkgreen
+hi specialkey   ctermfg=Black
 hi nontext      cterm=bold           ctermfg=darkblue
 hi directory    ctermfg=darkcyan
 hi errormsg     cterm=bold           ctermfg=7        ctermbg=1
@@ -147,7 +147,7 @@ hi string       ctermfg=DarkRed
 
 hi link Character       string
 hi link Boolean         type
-hi link Float           type
+hi link Float           number
 "hi link Repeat          Statement
 
 "hi link Exception       Statement
@@ -160,6 +160,11 @@ hi link include         identifier
 hi link define          identifier
 hi link macro           identifier
 hi link PreCondit       identifier
+
+"// show tail whitespace
+match Error /\s\+$/
+"// show tab space
+set list listchars=tab:>.
 
 "/***************************************************************
 "* matchparen

@@ -463,7 +463,7 @@ hi def link cCppOut		Comment
 "========================================================
 " Operators
 syn match cOperator	"\(<<\|>>\|[-+*/%&^|<>!=]\)="
-syn match cOperator	"<<\|>>\|&&\|||\|++\|--\|->"
+syn match cOperator	"<<\|>>\|&&\|||\|++\|--\|->\|?\|:"
 syn match cOperator	"[.!~*&%<>^|=,+-]"
 syn match cOperator	"/[^/*=]"me=e-1
 syn match cOperator	"/$"

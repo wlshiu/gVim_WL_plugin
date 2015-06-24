@@ -209,7 +209,7 @@ if &diff
     map <A-Down> ]c
     map <A-UP>   [c
 else
-    set cursorline!
+    set nocursorline
 endif
 "/***************************************************************
 "* folding setting
@@ -282,6 +282,7 @@ if 0
 
 else
 " ----------- tagbar ---------------------
+    let g:tagbar_ctags_bin ='$VIMRUNTIME\ctags.exe'
     let g:tagbar_left = 1
     let g:tagbar_sort = 0
     let g:tagbar_autoshowtag = 1
@@ -304,8 +305,15 @@ let NERDChristmasTree=1
 "// highlight 目前 cursor的列
 let NERDTreeHighlightCursorline=1
 
+let g:NERDTreeWinSize=42
+let g:NERDTreeDirArrows=0
+
+"// only show
+let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\)\@<!$[[file]]']
+
 "nmap <S-n> :NERDTreeToggle<CR>
 nmap <A-n> :NERDTreeToggle<CR>
+nmap nt :NERDTreeToggle<CR>
 
 "/***************************************************************
 "* clang complete
@@ -474,8 +482,8 @@ let g:buffergator_viewport_split_policy="T"
 "key CCTreeLoadDB 後 enter 自動選上 cscope.out
 let g:CCTreeCscopeDb = "cscope.out"
 " set hot key
-let g:CCTreeKeyTraceForwardTree = 'c.'
-let g:CCTreeKeyTraceReverseTree = 'c,'
+let g:CCTreeKeyTraceForwardTree = ',ct'
+let g:CCTreeKeyTraceReverseTree = ',c'
 set updatetime=0
 
 
@@ -553,8 +561,21 @@ au BufRead,BufNewFile * call ShowSignColumn()
 "/***************************************************************
 "* unite
 "***************************************************************/
-nmap <A-w> <Esc>:Unite -start-insert file<CR>
-let g:unite_source_file_rec_max_depth =10
+" nmap <A-w> <Esc>:Unite -start-insert file<CR>
+nmap uf <Esc>:Unite -start-insert file<CR>
+nmap ur <Esc>:Unite file_rec<CR>
+" nnoremap ua :Unite file_rec/async<cr>
+
+let g:unite_update_time=500
+let g:unite_enable_start_insert = 1
+let g:unite_source_file_rec_max_depth=5
+let g:unite_source_file_mru_time_format = "%m/%d %T "
+let g:unite_source_directory_mru_time_format = "%m/%d %T "
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_history_yank_limit = 40
+" call unite#custom_source('file,buffer,file_rec', 'matchers', 'matcher_fuzzy')
 "/***************************************************************
 "* AStyle
 "***************************************************************/
@@ -585,3 +606,4 @@ map <A-F8> <Esc>:call CodeFormat()<CR>
   " nmap \a<SPACE> :Tabularize / <CR>
   " vmap \a<SPACE> :Tabularize / <CR>
 " endif
+
