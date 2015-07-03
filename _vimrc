@@ -309,7 +309,7 @@ let g:NERDTreeWinSize=42
 let g:NERDTreeDirArrows=0
 
 "// only show
-let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\)\@<!$[[file]]']
+let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\|.mk\|Makefile\)\@<!$[[file]]']
 
 "nmap <S-n> :NERDTreeToggle<CR>
 nmap <A-n> :NERDTreeToggle<CR>
@@ -486,7 +486,19 @@ let g:CCTreeKeyTraceForwardTree = ',ct'
 let g:CCTreeKeyTraceReverseTree = ',c'
 set updatetime=0
 
-
+"/***************************************************************
+"* EasyGrep
+"***************************************************************/
+let g:EasyGrepCommand = 0    " vimgrep:0, grep:1 #vimgrep搜索較慢, 在Win上無需安裝grep.exe
+let g:EasyGrepMode = 3       " All:0, Open Buffers:1, TrackExt:2 User mode:3 # 1表示在已打開的buff中搜索, 2表示在當前文件相同擴展名的文件中搜索
+let g:EasyGrepRecursive  = 1 " Recursive searching 遞歸搜索
+let g:EasyGrepRoot = "cwd"   " 設置搜索根路徑, cwd:current dir
+" let g:EasyGrepRoot = "search:.git,.svn" 設置搜索根路徑為git/svn repos的根路徑
+" let g:EasyGrepRoot = "search:.project" 設置搜索根路徑為包含.project文件的目錄,這個文件需手動創建
+let g:EasyGrepIgnoreCase = 0 " Not ignore:0, ignore:1 大小寫敏感
+" let g:EasyGrepFilesToExclude = "tags, *.bak, *~, cscope.*, *.a, *.o, *.pyc, *.bak, *.swp"
+let g:EasyGrepOpenWindowOnMatch = 1
+let g:EasyGrepDefaultUserPattern = "*.c *.h *.cpp *.hpp *.cxx *.hxx *.cc *.hh *.c++ *.patch .m4 *.ac *[mM]akefile *.mk *.mak *.sh *.bash *.cmd *.bat"
 "/***************************************************************
 "* SrcExpl
 "***************************************************************/
