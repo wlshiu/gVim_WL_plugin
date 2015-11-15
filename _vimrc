@@ -124,7 +124,7 @@ set autoindent
 set tags=tags;
 
 "// 自動切換working directory, 以current file 所在目錄為主
-"set autochdir
+set autochdir
 
 "// 設定狀態列
 set laststatus=2
@@ -165,7 +165,6 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 "// 解決consle輸出亂碼
 language messages zh_tw.utf-8
-
 
 "// 視窗滾動保留列數
 set scrolloff=3
@@ -211,6 +210,12 @@ if &diff
 else
     set nocursorline
 endif
+
+"// set python fold
+autocmd FileType python setlocal foldmethod=indent
+set foldlevel=5
+nnoremap <space> za
+vnoremap <space> zc
 "/***************************************************************
 "* folding setting
 "***************************************************************/
@@ -309,7 +314,7 @@ let g:NERDTreeWinSize=42
 let g:NERDTreeDirArrows=0
 
 "// only show
-let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\|.mk\|Makefile\)\@<!$[[file]]']
+let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\|.mk\|.py\|Makefile\)\@<!$[[file]]']
 
 "nmap <S-n> :NERDTreeToggle<CR>
 nmap <A-n> :NERDTreeToggle<CR>
@@ -328,6 +333,32 @@ nmap nt :NERDTreeToggle<CR>
 " 不使用 quickFix window
 "set cscopequickfix=s-,c-,d-,i-,t-,e-
 
+if has("cscope")
+    set csto=0 "// 0 = first cscope and then ctag
+    set cst    "// use cscope and ctag
+    set cspc=4 "// show last 3 part of path
+
+    "// add any database
+    let search_layer=2
+    let curdir = getcwd()
+
+    let i = 1
+    while i < search_layer
+        if filereadable("cscope.out")
+            cs add cscope.out
+            " let i = search_layer "// for only add one cscope database
+        endif
+        cd ..
+        let i += 1
+    endwhile
+
+    "// search tags
+    set tags=./tags;
+    " set autochdir
+    " set noautochdir
+
+    " execute "cd " . curdir
+endif
 
 "  "//設定 cscope.exe 路徑
 "  "let cscope='$VIMRUNTIME\cscope.exe'
@@ -409,9 +440,9 @@ function Do_CsTag()
 
     if !filereadable("cscope.files")
         if(has("win32"))
-            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hh > cscope.files"
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hh,*.py > cscope.files"
         else
-            silent! execute "!gfind . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java'> cscope.files"
+            silent! execute "!gfind . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.py' > cscope.files"
         endif
     endif
 
@@ -618,4 +649,5 @@ map <A-F8> <Esc>:call CodeFormat()<CR>
   " nmap \a<SPACE> :Tabularize / <CR>
   " vmap \a<SPACE> :Tabularize / <CR>
 " endif
+
 
