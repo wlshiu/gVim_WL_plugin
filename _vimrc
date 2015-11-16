@@ -216,6 +216,8 @@ autocmd FileType python setlocal foldmethod=indent
 set foldlevel=5
 nnoremap <space> za
 vnoremap <space> zc
+
+let python_highlight_all=1
 "/***************************************************************
 "* folding setting
 "***************************************************************/
