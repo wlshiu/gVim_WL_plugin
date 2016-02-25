@@ -472,6 +472,13 @@ endfunction
 map <A-g> <Esc>:call Do_CsTag() <CR>
 
 "/***************************************************************
+"* getfile - search file
+"***************************************************************/
+let g:GetFileCacheFileName = 'cscope.files'
+let g:GetFileWholeWordsMatches = 1
+nmap <A-w> <Esc>:GetFile <CR>
+
+"/***************************************************************
 "* QuickFix (default plug-in)
 "***************************************************************/
 "//直接向前或向後跳到 quickFix wind項目的位置
