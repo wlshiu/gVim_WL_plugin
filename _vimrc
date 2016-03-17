@@ -92,6 +92,7 @@ if !exists("syntax_on")
 endif
 
 set fileformat=unix
+filetype plugin on
 
 set guifont=monaspace\ 12
 colorscheme wl_style
@@ -107,6 +108,7 @@ set number
 
 "// 用 space 代替 tab
 set expandtab
+autocmd FileType make setlocal noexpandtab
 
 "// 設置TAB寬度
 set tabstop=4
