@@ -29,6 +29,12 @@ SHELL CMD                                   *shell-cmd*
 
 :cw             秀出 quickFixf視窗
 
+:sus            suspend vim and give you a console. >
+    ctrl + z
+<
+
+$ fg            go back to vim in console
+
 :%s/\r//g       取代字尾 ^M 字符 >
     nmap \dm <Esc>:%s/\r//g <CR>
 <
