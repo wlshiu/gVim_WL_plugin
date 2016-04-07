@@ -123,7 +123,7 @@ set smartindent
 set autoindent
 
 "// 逐層向上搜尋 tags file
-set tags=tags;
+" set tags=tags;
 
 "// 自動切換working directory, 以current file 所在目錄為主
 set autochdir
@@ -262,6 +262,11 @@ nmap mt <End>
 
 " set plug-in help file path
 nmap hp <Esc>:helptags $VIMRUNTIME\doc <CR>
+
+" show tab
+set list listchars=tab:>.
+" show ^M
+set e ++ff=unix %
 "/***************************************************************
 "* taglist/tagbar setting
 "***************************************************************/

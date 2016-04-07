@@ -49,15 +49,14 @@ hi LineNr       ctermfg=247 guifg=#9e9e9e ctermbg=233 guibg=#121212
 hi MatchParen   ctermfg=188 guifg=#dfdfdf ctermbg=68  guibg=#5f87df cterm=bold gui=bold
 " TODO
 " hi MoreMsg
-hi NonText      ctermfg=247 guifg=#9e9e9e ctermbg=233 guibg=#121212 cterm=bold gui=bold
+hi NonText      ctermfg=33 guifg=#9e9e9e ctermbg=233 guibg=#121212 cterm=bold gui=bold
 hi Pmenu        ctermfg=0   guifg=#000000 ctermbg=250 guibg=#bcbcbc
 hi PmenuSel     ctermfg=255 guifg=#eeeeee ctermbg=243 guibg=#767676
 hi PmenuSbar                              ctermbg=252 guibg=#d0d0d0
 hi PmenuThumb   ctermfg=243 guifg=#767676
 hi Search       ctermfg=0   guifg=#000000 ctermbg=149 guibg=#afdf5f
 hi SignColumn   ctermfg=248 guifg=#a8a8a8
-" hi SpecialKey   ctermfg=77  guifg=#5fdf5f
-hi SpecialKey   ctermfg=0   guifg=#4d4d4d
+hi SpecialKey   ctermfg=239  guifg=#5fdf5f
 hi SpellBad     ctermfg=160 guifg=fg      ctermbg=bg                cterm=underline               guisp=#df0000
 hi SpellCap     ctermfg=189 guifg=#dfdfff ctermbg=bg  guibg=bg      cterm=underline gui=underline
 hi SpellRare    ctermfg=168 guifg=#df5f87 ctermbg=bg  guibg=bg      cterm=underline gui=underline
@@ -141,4 +140,7 @@ hi treeLink       ctermfg=182  guifg=#dfafdf
 " sign define breakPoint  linehl=breakPoint  text=>>
 " sign define both        linehl=currentLine text=>>
 " sign define empty       linehl=empty
+
+"// show tail whitespace
+match Error /\s\+$/
 
