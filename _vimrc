@@ -266,7 +266,7 @@ nmap hp <Esc>:helptags $VIMRUNTIME\doc <CR>
 " show tab
 set list listchars=tab:>.
 " show ^M
-set e ++ff=unix %
+set ffs=unix
 "/***************************************************************
 "* taglist/tagbar setting
 "***************************************************************/
