@@ -515,6 +515,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|o|a|out|obj|bin|cmd)$',
   \ }
 
+let g:ctrlp_match_window = 'results:200'
+
 " if(has("win32"))
     " let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d /o-n *.h *.hh *.c *.cpp' " Windows
 " else
@@ -669,4 +671,18 @@ map <A-F8> <Esc>:call CodeFormat()<CR>
   " vmap \a<SPACE> :Tabularize / <CR>
 " endif
 
+"/***************************************************************
+"* indentLine
+"***************************************************************/
+"  ~/.vim (Linux) or ~/vimfiles (Windows)
+"      ── after
+"         ├── plugin
+"         │   └── indentLine.vim
+"         └── syntax
+"             ├── indentLine.vim
+"             ├── sass.vim
+"             └── yaml.vim
+"
 
+let g:indentLine_color_term = 239
+let g:indentLine_char = '¦'
