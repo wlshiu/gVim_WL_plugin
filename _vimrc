@@ -428,6 +428,12 @@ set list listchars=tab:>.
 " show ^M
 set ffs=unix
 
+"// folding setting
+"set foldmethod=syntax   "// 依內容
+"set foldmethod=marker    "// 依自訂
+"set foldmethod=indent  "// 依縮排
+set foldnestmax=3
+set foldcolumn=3
 
 "// diff setting
 if &diff
