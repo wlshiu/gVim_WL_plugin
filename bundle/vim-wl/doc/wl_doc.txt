@@ -1,0 +1,417 @@
+*wl_doc.txt*    For Vim version 7.3.
+
+    My Note
+==============================================================================
+Contents
+    shell cmd..........................|shell-cmd|
+    hot key........................... |hotkey|
+    plug-in............................|plug-in|
+    misc...............................|misc|
+
+==============================================================================
+SHELL CMD                                   *shell-cmd*
+
+:Ex             開啟目錄瀏覽器，注意首字母E是大寫的
+
+:Sex            在一個分割的窗口中開啟目錄瀏覽器
+
+:ls             顯示當前buffer的情況
+
+:cd ..          進入父目錄
+
+:args           顯示目前打開的文件
+
+:lcd %:p:h      更改到當前文件所在的目錄
+                譯釋：lcd是緊緊改變當前窗口的工作路徑，% 是代表當前文件的文件名,
+                加上 :p擴展成全名（就是帶了路徑），加上 :h析取出路徑
+
+:lcd %:h        切換work directory到目前file的目錄
+
+:cw             秀出 quickFixf視窗
+
+:sus            suspend vim and give you a console. >
+    ctrl + z
+<
+
+$ fg            go back to vim in console
+
+:%s/\r//g       取代字尾 ^M 字符 >
+    nmap \dm <Esc>:%s/\r//g <CR>
+<
+
+:%s/\s\+$//g    刪除字尾空白 >
+    nmap \de <Esc>:%s/\s\+$//g <CR>
+<
+
+replace pre-existing tabs >
+    nmap \rt <Esc>:retab <CR>
+<
+
+when press \ + Enter, the cursor break context to next line. >
+    nmap \<CR>  i<CR><ESC>
+<
+
+when press \ + Space, insert white spec at cursor. >
+    nmap \<SPACE>  i<SPACE><ESC>
+<
+
+diff a.file b.file >
+    $ vim FILE_LEFT
+    :vertical diffsplit FILE_RIGHT
+<
+or >
+    $ vim -d FILE_LEFT FILE_RIGHT
+<
+or >
+    $ vimdiff FILE_LEFT FILE_RIGHT
+<
+==============================================================================
+HOTKEY                                       *hotkey*
+
+-------------- *generate myself c header pattern*
+:edit [{your_file_name}]
+
+:GenHeader                      defined in wl_doc.vim
+
+-------------- *diff*
+]c # 跳到下一個差異點 >
+    map <A-Down>
+<
+[c # 跳到前一個差異點 >
+    map <A-UP>
+<
+把 current file的內容複製到the other file, 可以使用 diff put命令 >
+    dp
+    :diffput
+<
+把the other file的內容複製到current file,可以使用 diff obtain命令  >
+    do
+    :diffget
+<
+撤銷修改，將光標移動到需要撤銷修改的文件窗口中，直接 >
+    <ESC> + u
+<
+在修改文件後，vimdiff會試圖自動來重新比較文件，來反映比較結果。
+但是也會有處理失敗的情況，這個時候需要手工來刷新比較結果 >
+    :diffupdate
+<
+-------------- *區塊註解*
+於控制選項(ESC下), 游標移動至要註解的開頭第一個字
+按Ctrl-V, 接著往下選取要註解的區塊
+按大寫I插入. 插入註解符號(如’, //, #)
+最後, 按Esc, 返回控制選項
+ps. windows環境下, 需先取消預設 hotkey ctrl-v = 貼上 (unmap <C-V> in _vimrc)
+
+
+-------------- *範圍選取*
+※以下看到的 "|" 是 or 的意思
+v | c | d  +  i | a  +  { | [ | " | '
+
+v: visual
+c: change
+d: delete
+i: inner object
+a: an object
+{},[],"",'': region
+
+va{ 選取最小範圍的{}部份
+vi{ 選取最小範圍的{}部份(但不包含{})
+di" 移除最小範圍的""部份(但不包含"")
+ci( 修改最小範圍的()部份(但不包含())
+va{= 選取最小範圍的{}部份並排列整齊
+
+
+-------------- *Wind Contorl*
+<C-w> n 新建一個窗口並創建一個新文件
+<C-w> s 新建一個水平窗口並打開當前文件
+<C-w> v 新建一個垂直窗口並打開當前文件
+<C-w> c 關閉當前窗口
+<C-w> q 離開 vim，( :q)
+<C-w> <C-w>      順序切換窗口
+<C-w> o 關閉其他窗口只留下當前窗口
+<C-w> j 切換到下一個窗口
+<C-w> k 切換到上一個窗口
+<C-w> r 上下窗口調換位置
+<C-w> - 減小當前窗口高度
+<C-w> + 增加當前窗口高度
+:res -n 減小當前窗口高度n行
+:res +n 增加當前窗口高度n行
+
+-------------- *windows下GVim的塊選擇方式*
+On Unix:
+    Type <C-V> and select your block of text.
+On Windows with Gvim
+    Enter Visual Mode"v" then <C-q>.
+
+
+==============================================================================
+PLUG-IN                                      *plug-in*
+
+-------------- *ctags/cscope*
+:!ctags -R
+ or
+:!ctags -L cscope.files (create by find cmd)
+
+:!cscope -Rbq
+ or
+:!cscope -Rbq -i cscope.file(create by find cmd)
+ or
+:!cscope -Rbq -P selected_dir1 -P selected_dir2 ...
+
+
+:set tags=your_tags_file_path
+:cs add cscope.out
+
+    CTRL-]  go to function define
+    CTRL-T  pop previous function
+    CTRL-O  pop previous function
+
+:cs find f|s|g|d|c|t|e|i| selected_word
+
+    <C-\>s = cs find s 游標目前單詞
+    <C-\>g = cs find g 游標目前單詞
+    <C-\>c = cs find c 游標目前單詞
+    <C-\>t = cs find t 游標目前單詞
+    <C-\>e = cs find e 游標目前單詞
+    <C-\>f = cs find f 游標目前單詞
+    <C-\>i = cs find i 游標目前單詞
+    <C-\>d = cs find d 游標目前單詞
+
+    f: 查找並打開文檔，類似vim的find功能
+    s: 查找C語言符號，即查找函數名、宏、枚舉值等出現的地方
+    g: 查找函數、宏、枚舉等定義的位置，類似ctags所提供的功能
+    d: 查找本函數會使用的function
+    c: 查找reference 本函數的function
+    t: 查找指定的字符串
+    e: 查找egrep模式，相當於egrep功能，但查找速度快多了
+    i: 查找包含本文檔的文
+
+支援 C++
+step 1. 建立搜尋file list (generate cscope.files)
+    :find . -name "*.h" -o -name "*.c" -o -name "*.cc" -name "*.cpp" > cscope.files
+setp 2. 開始建立索引 cscope.out
+    :cscope -bkq -i cscope.files
+
+-------------- *EasyGrep*
+將在文件中搜索當前光標下的單詞 >
+    \vv
+    :Grep
+    :Grep word      # 將搜索"word"
+    :Grep !word     # 表示全詞匹配的方式搜索
+<
+Grep也可以帶參數, 比如:Grep -ir word, r表示遞歸目錄. i表示不區分大小寫.
+
+全詞匹配搜索, 同:Grep !word; >
+    \vV
+<
+與vv相似, 搜索結果append在上次搜索結果之後 >
+    \va
+<
+與vV相似, 搜索結果append在上次搜索結果之後 >
+    \vA
+<
+替換 >
+    \vr or :Replace
+<
+打開選項菜單 >
+    \vo or :GrepOptions
+<
+-------------- *A.vim*
+開啟對應的 header file
+:A      切換到 h file
+:AS     橫向分割開啟 h file
+:AV     縱向分割開啟 h file
+:AT     新tab 開啟 h file
+
+
+-------------- *FuzzyFinder*
+: FufFile
+    in search bar
+    "**\" recursive
+    ex. **\關鍵字
+
+FuzzyFinder 提供的 cmd
+    FufBuffer      -  Buffer mode (fuf-buffer-mode)
+    FufFile        -  File mode (fuf-file-mode)
+    FufDir         -  Directory mode (fuf-dir-mode)
+    FufMruFile     -  MRU-File mode (fuf-mrufile-mode)
+    FufMruCmd      -  MRU-Command mode (fuf-mrucmd-mode)
+    FufBookmark    -  Bookmark mode (fuf-bookmark-mode)
+    FufTag         -  Tag mode (fuf-tag-mode)
+    FufTaggedFile  -  Tagged-File mode (fuf-taggedfile-mode)
+    FufJumpList    -  Jump-List mode (fuf-jumplist-mode)
+    FufChangeList  -  Change-List mode (fuf-changelist-mode)
+    FufQuickfix    -  Quickfix mode (fuf-quickfix-mode)
+    FufLine        -  Line mode (fuf-line-mode)
+    FufHelp        -  Help mode (fuf-help-mode)
+
+特殊配置:
+  map <silent> <C-\> :FufTag! <C-r>=expand('<cword>')<CR><CR>
+  只需在要查的關鍵字上按下Ctrl+\便能用FuzzyFinderTag來查詢
+
+  Ctrl-n , Ctrl-p 上下選擇項目
+  Ctrl-j          開啟該檔案到水平分割視窗
+  Ctrl-k          開啟該檔案到垂直分割視窗
+  Ctrl-l          開啟檔案至新分頁
+
+
+-------------- *AutoComplPop*
+在補全視窗選擇 item
+<C-n>
+<C-p>
+
+
+-------------- *BufferExplorer*
+In "normal mode"
+
+\be : full screen buffer browser
+\bv : vertical split screen buffer browser
+\bs : horizontal split screen buffer browser
+q   : exit
+
+
+-------------- *MiniBufExplorer*
+:bn   打開當前buffer的下一個buffer
+:bp   打開當前buffer的前一個buffer
+:b"num"   打開指定的buffer，"num"指的是buffer開始的那個數字
+
+
+-------------- *Calzone*
+:Calzone    顯示 #ifdef #endif 的 block zone
+
+
+-------------- *tabular*
+:Tab / + "symbol"
+ex.
+    :Tab /=         對齊 =
+    :Tab /:         對齊 :
+
+
+-------------- *Align*
+ps. 造成有用leader key "\" 的 hotkey 都變慢
+處理文字對齊的問題，比如 source code 的宣告，賦值，或是註解等等。
+這邊介紹比較簡單的使用方式，詳情請參考說明檔 (:help Align)
+
+對齊賦值
+\t + "symbol"
+
+ex.
+    \t=     對齊 =
+    \t,     代表對齊逗號
+    \t|     對齊 |
+    \tsp    對齊空白字元
+    等等
+
+對齊宣告參數
+\adec
+    一樣用 visual mode 選取想要對齊的區域，輸入 \adec。
+
+
+-------------- *NERD-Commenter*
+在Normal或者Visual 模式下：
+<leader>ca,         在當前行尾添加註解符，並進入Insert模式
+<leader>cc,         註解當前行
+<leader>cl,         註解當前行
+<leader>cu,         取消註解
+<leader>c<Spaces>,  切換註釋/非註釋狀態
+<leader>cy,         將選擇的部份做區塊註解
+<leader>cs,         以"性感"的方式註解
+<leader>cA,         在可選的註解方式之間切換，比如C/C++ 的塊註釋/* */和行註釋//
+
+n + <leader>cl, 註解cursor以下 n 行
+
+Normal模式下，幾乎所有命令前面都可以指定行數
+Visual模式下執行命令，會對選中的特定區塊進行註釋/反註釋
+ps.各命令<leader>是可以自己設置的，通常是',' 或 '\'.
+
+
+-------------- *cctree*
+Displays hierarchical call-trees
+c. : 本函數會使用的function tree
+c, : reference 本函數的function
+
+
+-------------- *Trinity*
+管理Source Explorer/Tag List/NERD_tree的 layout
+Source Explorer     自動顯示定義
+
+<C-F7> : Open and close all the three plugins on the same time
+<C-F9> : Open and close the srcexpl.vim separately
+<C-F10>: Open and close the taglist.vim separately
+<C-F11>: Open and close the NERD_tree.vim separately
+
+
+-------------- *Mark*
+\m              highlight selected word
+:MarkClear      clear all mark
+
+
+-------------- *DrawIt*
+   \di to start DrawIt and
+   \ds to stop  DrawIt.
+
+In view mode you can directly draw
+Supported Features
+   <left>       move and draw left
+   <right>      move and draw right, inserting lines/space as needed
+   <up>         move and draw up, inserting lines/space as needed
+   <down>       move and draw down, inserting lines/space as needed
+   <s-left>     move left
+   <s-right>    move right, inserting lines/space as needed
+   <s-up>       move up, inserting lines/space as needed
+   <s-down>     move down, inserting lines/space as needed
+   <space>      toggle into and out of erase mode
+   >            draw -> arrow
+   <            draw <- arrow
+   ^            draw ^  arrow
+   v            draw v  arrow
+   <pgdn>       replace with a \, move down and right, and insert a \
+   <end>        replace with a /, move down and left,  and insert a /
+   <pgup>       replace with a /, move up   and right, and insert a /
+   <home>       replace with a \, move up   and left,  and insert a \
+   \>           draw fat -> arrow
+   \<           draw fat <- arrow
+   \^           draw fat ^  arrow
+   \v           draw fat v  arrow
+   \a           draw arrow based on corners of visual-block
+   \b           draw box using visual-block selected region
+   \e           draw an ellipse inside visual-block
+   \f           fill a figure with some character
+   \h           create a canvas for \a \b \e \l
+   \l           draw line based on corners of visual block
+   \s           adds spaces to canvas
+   <leftmouse>  select visual block
+ <s-leftmouse>  drag and draw with current brush (register)
+   \ra ... \rz  replace text with given brush/register
+   \pa ...      like \ra ... \rz, except that blanks are considered
+                to be transparent
+
+==============================================================================
+MISC                                         *misc*
+
+    *special characters list of Vim key* >
+        <BS>           Backspace
+        <Tab>          Tab
+        <CR>           Enter
+        <Enter>        Enter
+        <Return>       Enter
+        <Esc>          Escape
+        <Space>        Space
+        <Up>           Up arrow
+        <Down>         Down arrow
+        <Left>         Left arrow
+        <Right>        Right arrow
+        <F1> - <F12>   Function keys 1 to 12
+        #1, #2..#9,#0  Function keys F1 to F9, F10
+        <Insert>       Insert
+        <Del>          Delete
+        <Home>         Home
+        <End>          End
+        <PageUp>       Page-Up
+        <PageDown>     Page-Down
+        <bar>          the '|' character, which otherwise needs to be escaped '\|'
+<
+
+
+==============================================================================
+ vim: tw=78 ts=8 sw=8 sts=8 noet ft=help

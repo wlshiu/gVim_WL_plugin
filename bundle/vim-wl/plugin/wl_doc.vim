@@ -1,0 +1,65 @@
+function! OpenWlDoc()
+    exec 'sp' $VIMRUNTIME . '/plugin/doc/wl_doc.txt'
+endfunction
+
+" command! WlDoc :call OpenWlDoc()
+command! WlDoc :helpgrep wl_doc.txt
+
+
+func SetCopyright()
+    call setline(1,          "/**")
+    call append(line("."),   " * Copyright (C) ".strftime("%Y")." Wei-Lun Hsu. All rights reserved.")
+    call append(line(".")+1, " */")
+    call append(line(".")+2, "/** @file   ".expand("%:t"))
+    call append(line(".")+3, " *")
+    call append(line(".")+4, " * @author Wei-Lun Hsu")
+    call append(line(".")+5, " * @date   ".strftime("%Y-%m-%d"))
+    call append(line(".")+6, " * @version 0.1")
+    call append(line(".")+7, " */")
+    call append(line(".")+8, "")
+endfunc
+
+func GenCHeader()
+    call SetCopyright()
+    call append(line(".")+9,  "#ifndef _".toupper(expand("%:t:r"))."_H")
+    call append(line(".")+10, "#define _".toupper(expand("%:t:r"))."_H")
+    call append(line(".")+11, "")
+    call append(line(".")+12, "#ifdef __cplusplus")
+    call append(line(".")+13, "extern \"C\" {")
+    call append(line(".")+14, "#endif")
+    call append(line(".")+15, "")
+    call append(line(".")+16, "//=============================================================================")
+    call append(line(".")+17, "//                 Constant Definition")
+    call append(line(".")+18, "//=============================================================================")
+    call append(line(".")+19, "")
+    call append(line(".")+20, "//=============================================================================")
+    call append(line(".")+21, "//                 Macro Definition")
+    call append(line(".")+22, "//=============================================================================")
+    call append(line(".")+23, "")
+    call append(line(".")+24, "//=============================================================================")
+    call append(line(".")+25, "//                 Structure Definition")
+    call append(line(".")+26, "//=============================================================================")
+    call append(line(".")+27, "")
+    call append(line(".")+28, "//=============================================================================")
+    call append(line(".")+29, "//                 Global Data Definition")
+    call append(line(".")+30, "//=============================================================================")
+    call append(line(".")+31, "")
+    call append(line(".")+32, "//=============================================================================")
+    call append(line(".")+33, "//                 Private Function Definition")
+    call append(line(".")+34, "//=============================================================================")
+    call append(line(".")+35, "")
+    call append(line(".")+36, "//=============================================================================")
+    call append(line(".")+37, "//                 Public Function Definition")
+    call append(line(".")+38, "//=============================================================================")
+    call append(line(".")+39, "")
+    call append(line(".")+40, "#ifdef __cplusplus")
+    call append(line(".")+41, "}")
+    call append(line(".")+42, "#endif")
+    call append(line(".")+43, "")
+    call append(line(".")+44, "#endif // ".toupper(expand("%:t:r"))."_H")
+    call append(line(".")+45, "")
+endfunc
+
+command! GenHeader :call GenCHeader()
+
+" imap <silent> <C-U><C-U> {<C-R>=system('uuidgen')<CR><C-U><BS>}
