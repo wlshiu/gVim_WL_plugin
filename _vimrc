@@ -149,6 +149,16 @@
     "-----------------
     " airline: {{{1
         Plugin 'vim-airline/vim-airline'
+        set t_Co=256
+        " set status line
+        set laststatus=2
+
+        "// enable tabline and show buffer number
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#buffer_nr_show = 1
+
+        " set left separator which are not editting
+        let g:airline#extensions#tabline#left_alt_sep = '|'
     " }}}1
 
 

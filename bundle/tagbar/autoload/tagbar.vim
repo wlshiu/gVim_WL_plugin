@@ -421,10 +421,19 @@ function! s:InitTypes() abort
     " HTML {{{3
     let type_html = s:TypeInfo.New()
     let type_html.ctagstype = 'html'
-    let type_html.kinds     = [
-        \ {'short' : 'f', 'long' : 'JavaScript funtions', 'fold' : 0, 'stl' : 1},
-        \ {'short' : 'a', 'long' : 'named anchors',       'fold' : 0, 'stl' : 1}
-    \ ]
+    if s:ctags_is_uctags
+        let type_html.kinds = [
+            \ {'short' : 'a', 'long' : 'named anchors', 'fold' : 0, 'stl' : 1},
+            \ {'short' : 'h', 'long' : 'H1 headings',   'fold' : 0, 'stl' : 1},
+            \ {'short' : 'i', 'long' : 'H2 headings',   'fold' : 0, 'stl' : 1},
+            \ {'short' : 'j', 'long' : 'H3 headings',   'fold' : 0, 'stl' : 1},
+        \ ]
+    else
+        let type_html.kinds = [
+            \ {'short' : 'f', 'long' : 'JavaScript functions', 'fold' : 0, 'stl' : 1},
+            \ {'short' : 'a', 'long' : 'named anchors',        'fold' : 0, 'stl' : 1}
+        \ ]
+    endif
     let s:known_types.html = type_html
     " Java {{{3
     let type_java = s:TypeInfo.New()
@@ -1010,6 +1019,11 @@ function! s:MapKeys() abort
         \ ['help',                  'ToggleHelp()'],
     \ ]
 
+    let map_options = ' <script> <silent> <buffer> '
+    if v:version > 703 || (v:version == 703 && has('patch1261'))
+        let map_options .= ' <nowait> '
+    endif
+
     for [map, func] in maps
         let def = get(g:, 'tagbar_map_' . map)
         if type(def) == type("")
@@ -1018,7 +1032,7 @@ function! s:MapKeys() abort
             let keys = def
         endif
         for key in keys
-            execute 'nnoremap <script> <silent> <buffer> ' . key .
+            execute 'nnoremap' . map_options . key .
                         \ ' :call <SID>' . func . '<CR>'
         endfor
         unlet def
@@ -1142,7 +1156,8 @@ function! s:CheckForExCtags(silent) abort
             \ ' Please download Exuberant Ctags from ctags.sourceforge.net' .
             \ ' and install it in a directory in your $PATH' .
             \ ' or set g:tagbar_ctags_bin.'
-        call s:CtagsErrMsg(errmsg, infomsg, a:silent, ctags_cmd, ctags_output)
+        call s:CtagsErrMsg(errmsg, infomsg, a:silent,
+                         \ ctags_cmd, ctags_output, v:shell_error)
         let s:checked_ctags = 2
         return 0
     elseif !s:CheckExCtagsVersion(ctags_output)
@@ -1162,10 +1177,18 @@ endfunction
 function! s:CtagsErrMsg(errmsg, infomsg, silent, ...) abort
     call s:debug(a:errmsg)
     let ctags_cmd    = a:0 > 0 ? a:1 : ''
-    let ctags_output = a:0 > 0 ? a:2 : ''
+    let ctags_output = a:0 > 1 ? a:2 : ''
+
+    let exit_code_set = a:0 > 2
+    if exit_code_set
+        let exit_code = a:3
+    endif
 
     if ctags_output != ''
         call s:debug("Command output:\n" . ctags_output)
+    endif
+    if exit_code_set
+        call s:debug("Exit code: " . exit_code)
     endif
 
     if !a:silent
@@ -1184,6 +1207,9 @@ function! s:CtagsErrMsg(errmsg, infomsg, silent, ...) abort
             endfor
         else
             echomsg 'Command output is empty.'
+        endif
+        if exit_code_set
+            echomsg 'Exit code: ' . exit_code
         endif
     endif
 endfunction
@@ -1823,14 +1849,19 @@ function! s:OpenWindow(flags) abort
     " since the window number can change due to the Tagbar window opening
     if exists('*win_getid')
         let prevwinid = win_getid()
-        call s:goto_win('p', 1)
-        let pprevwinid = win_getid()
+        if winnr('$') > 1
+            call s:goto_win('p', 1)
+            let pprevwinid = win_getid()
+            call s:goto_win('p', 1)
+        endif
     else
         let prevwinnr = winnr()
-        call s:goto_win('p', 1)
-        let pprevwinnr = winnr()
+        if winnr('$') > 1
+            call s:goto_win('p', 1)
+            let pprevwinnr = winnr()
+            call s:goto_win('p', 1)
+        endif
     endif
-    call s:goto_win('p', 1)
 
     " This is only needed for the CorrectFocusOnStartup() function
     let s:last_autofocus = autofocus
@@ -1853,13 +1884,16 @@ function! s:OpenWindow(flags) abort
 
     let s:window_opening = 1
     if g:tagbar_vertical == 0
-        let openpos = g:tagbar_left ? 'topleft vertical ' : 'botright vertical '
+        let mode = 'vertical '
+        let openpos = g:tagbar_left ? 'topleft ' : 'botright '
         let width = g:tagbar_width
     else
+        let mode = ''
         let openpos = g:tagbar_left ? 'leftabove ' : 'rightbelow '
         let width = g:tagbar_vertical
     endif
-    exe 'silent keepalt ' . openpos . width . 'split ' . s:TagbarBufName()
+    exe 'silent keepalt ' . openpos . mode . width . 'split ' . s:TagbarBufName()
+    exe 'silent ' . mode . 'resize ' . width
     unlet s:window_opening
 
     call s:InitWindow(autoclose)
@@ -1877,17 +1911,22 @@ function! s:OpenWindow(flags) abort
 
     if !(g:tagbar_autoclose || autofocus || g:tagbar_autofocus)
         if exists('*win_getid')
-            noautocmd call win_gotoid(pprevwinid)
+            if exists('pprevwinid')
+                noautocmd call win_gotoid(pprevwinid)
+            endif
             call win_gotoid(prevwinid)
         else
             " If the Tagbar winnr is identical to one of the saved values
             " then that means that the window numbers have changed.
             " Just jump back to the previous window since we won't be able to
             " restore the window history.
-            if winnr() == pprevwinnr || winnr() == prevwinnr
+            if winnr() == prevwinnr
+             \ || (exists('pprevwinnr') && winnr() == pprevwinnr)
                 call s:goto_win('p')
             else
-                call s:goto_win(pprevwinnr, 1)
+                if exists('pprevwinnr')
+                    call s:goto_win(pprevwinnr, 1)
+                endif
                 call s:goto_win(prevwinnr)
             endif
         endif
@@ -2314,6 +2353,7 @@ function! s:ExecuteCtagsOnFile(fname, realfname, typeinfo) abort
     if v:shell_error || ctags_output =~ 'Warning: cannot open source file'
         call s:debug('Command output:')
         call s:debug(ctags_output)
+        call s:debug('Exit code: ' . v:shell_error)
         " Only display an error message if the Tagbar window is open and we
         " haven't seen the error before.
         if bufwinnr(s:TagbarBufName()) != -1 &&
@@ -2327,6 +2367,7 @@ function! s:ExecuteCtagsOnFile(fname, realfname, typeinfo) abort
                     echomsg line
                 endfor
             endif
+            echomsg 'Exit code: ' . v:shell_error
         endif
         return -1
     endif
@@ -3217,7 +3258,8 @@ function! s:ShowInPreviewWin() abort
     " explicitly before the :psearch below to better control its positioning.
     if !pwin_open
         silent execute
-            \ g:tagbar_previewwin_pos . ' pedit ' . taginfo.fileinfo.fpath
+            \ g:tagbar_previewwin_pos . ' pedit ' .
+            \ fnameescape(taginfo.fileinfo.fpath)
         if g:tagbar_vertical != 0
             silent execute 'vertical resize ' . g:tagbar_width
         endif
@@ -3777,6 +3819,7 @@ function! s:ExecuteCtags(ctags_cmd) abort
     if s:debug
         silent 5verbose let ctags_output = system(a:ctags_cmd)
         call s:debug(v:statusmsg)
+        call s:debug('Exit code: ' . v:shell_error)
         redraw!
     else
         silent let ctags_output = system(a:ctags_cmd)
@@ -4005,6 +4048,12 @@ function! s:IsValidFile(fname, ftype) abort
         return 0
     endif
 
+    let winnr = bufwinnr(a:fname)
+    if winnr != -1 && getwinvar(winnr, '&diff')
+        call s:debug('Window is in diff mode')
+        return 0
+    endif
+
     if &previewwindow
         call s:debug('In preview window')
         return 0
@@ -4042,22 +4091,24 @@ function! s:SetStatusLine()
         let in_tagbar = 1
     endif
 
-    let sort = g:tagbar_sort ? 'Name' : 'Order'
-
     if !empty(s:TagbarState().getCurrent(0))
-        let fname = fnamemodify(s:TagbarState().getCurrent(0).fpath, ':t')
+        let fileinfo = s:TagbarState().getCurrent(0)
+        let fname = fnamemodify(fileinfo.fpath, ':t')
+        let sorted = get(fileinfo.typeinfo, 'sort', g:tagbar_sort)
     else
         let fname = ''
+        let sorted = g:tagbar_sort
     endif
+    let sortstr = sorted ? 'Name' : 'Order'
 
     let flags = []
     let flags += exists('w:autoclose') && w:autoclose ? ['c'] : []
     let flags += g:tagbar_autoclose ? ['C'] : []
-    let flags += (g:tagbar_sort && g:tagbar_case_insensitive) ? ['i'] : []
+    let flags += (sorted && g:tagbar_case_insensitive) ? ['i'] : []
     let flags += g:tagbar_hide_nonpublic ? ['v'] : []
 
     if exists('g:tagbar_status_func')
-        let args = [in_tagbar, sort, fname, flags]
+        let args = [in_tagbar, sortstr, fname, flags]
         let &l:statusline = call(g:tagbar_status_func, args)
     else
         let colour = in_tagbar ? '%#StatusLine#' : '%#StatusLineNC#'
@@ -4065,7 +4116,7 @@ function! s:SetStatusLine()
         if flagstr != ''
             let flagstr = '[' . flagstr . '] '
         endif
-        let text = colour . '[' . sort . '] ' . flagstr . fname
+        let text = colour . '[' . sortstr . '] ' . flagstr . fname
         let &l:statusline = text
     endif
 
@@ -4093,7 +4144,7 @@ function! s:HandleOnlyWindow() abort
         " Before quitting Vim, delete the tagbar buffer so that the '0 mark is
         " correctly set to the previous buffer.
         if tabpagenr('$') == 1
-            keepalt bdelete
+            noautocmd keepalt bdelete
         endif
 
         try
