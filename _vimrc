@@ -475,7 +475,8 @@ vnoremap <space> zc
 
 let python_highlight_all=1
 
-
+au BufNewFile,BufRead *.md set filetype=markdown
+au BufNewFile,BufRead *.lds set filetype=ld
 au BufRead,BufNewFile *.expand set filetype=rtl
 "//=====================================================
 "// hot key
