@@ -223,6 +223,8 @@ let python_highlight_all=1
 
 " add git path
 " let $PATH .= ';C:\Users\wlhsu\AppData\Local\Programs\Git\bin\'
+
+au BufRead,BufNewFile *.expand set filetype=rtl
 "/***************************************************************
 "* folding setting
 "***************************************************************/
