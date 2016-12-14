@@ -29,6 +29,8 @@ SHELL CMD                                   *shell-cmd*
 
 :cw             秀出 quickFixf視窗
 
+:g/pattern/#    list search result
+
 :sus            suspend vim and give you a console. >
     ctrl + z
 <

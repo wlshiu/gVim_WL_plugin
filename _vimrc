@@ -154,7 +154,7 @@
         set laststatus=2
 
         "// enable tabline and show buffer number
-        let g:airline#extensions#tabline#enabled = 1
+        " let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tabline#buffer_nr_show = 1
 
         " set left separator which are not editting
@@ -476,6 +476,7 @@ vnoremap <space> zc
 let python_highlight_all=1
 
 
+au BufRead,BufNewFile *.expand set filetype=rtl
 "//=====================================================
 "// hot key
 "//=====================================================
