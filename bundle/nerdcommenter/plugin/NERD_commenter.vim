@@ -79,6 +79,7 @@ let s:delimiterMap = {
     \ 'amiga': { 'left': ';' },
     \ 'aml': { 'left': '/*' },
     \ 'ampl': { 'left': '#' },
+    \ 'ansible': { 'left': '#' },
     \ 'apache': { 'left': '#' },
     \ 'apachestyle': { 'left': '#' },
     \ 'applescript': { 'left': '--', 'leftAlt': '(*', 'rightAlt': '*)' },
@@ -87,11 +88,12 @@ let s:delimiterMap = {
     \ 'asm': { 'left': ';', 'leftAlt': '#' },
     \ 'asm68k': { 'left': ';' },
     \ 'asn': { 'left': '--' },
-    \ 'asp': { 'left': '%', 'leftAlt': '%*','rightAlt': '*%' },
+    \ 'asp': { 'left': '%', 'leftAlt': '%*', 'rightAlt': '*%' },
     \ 'aspvbs': { 'left': '''', 'leftAlt': '<!--', 'rightAlt': '-->' },
     \ 'asterisk': { 'left': ';' },
     \ 'asy': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'atlas': { 'left': 'C', 'right': '$' },
+    \ 'augeas': { 'left': '(*', 'right': '*)' },
     \ 'autohotkey': { 'left': ';', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'autoit': { 'left': ';' },
     \ 'ave': { 'left': "'" },
@@ -104,7 +106,7 @@ let s:delimiterMap = {
     \ 'blade': { 'left': '{{--', 'right': '--}}' },
     \ 'bst': { 'left': '%' },
     \ 'btm': { 'left': '::' },
-    \ 'c': { 'left': '/*','right': '*/', 'leftAlt': '//' },
+    \ 'c': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'cabal': { 'left': '--' },
     \ 'calibre': { 'left': '//' },
     \ 'caos': { 'left': '*' },
@@ -128,7 +130,7 @@ let s:delimiterMap = {
     \ 'csp': { 'left': '--' },
     \ 'cterm': { 'left': '*' },
     \ 'cucumber': { 'left': '#' },
-    \ 'cuda': { 'left': '/*','right': '*/', 'leftAlt': '//' },
+    \ 'cuda': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'cvs': { 'left': 'CVS:' },
     \ 'cython': { 'left': '# ', 'leftAlt': '#' },
     \ 'd': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -140,7 +142,7 @@ let s:delimiterMap = {
     \ 'desktop': { 'left': '#' },
     \ 'dhcpd': { 'left': '#' },
     \ 'diff': { 'left': '#' },
-    \ 'django': { 'left': '<!--','right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
+    \ 'django': { 'left': '<!--', 'right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
     \ 'dns': { 'left': ';' },
     \ 'docbk': { 'left': '<!--', 'right': '-->' },
     \ 'dockerfile': { 'left': '#' },
@@ -157,7 +159,7 @@ let s:delimiterMap = {
     \ 'eiffel': { 'left': '--' },
     \ 'elf': { 'left': "'" },
     \ 'elixir': { 'left': '#' },
-    \ 'elm': { 'left': '--' },
+    \ 'elm': { 'left': '--', 'leftAlt': '{--', 'rightAlt': '--}' },
     \ 'elmfilt': { 'left': '#' },
     \ 'ember-script': { 'left': '#' },
     \ 'emblem': { 'left': '/' },
@@ -181,7 +183,7 @@ let s:delimiterMap = {
     \ 'gdb': { 'left': '#' },
     \ 'gdmo': { 'left': '--' },
     \ 'geek': { 'left': 'GEEK_COMMENT:' },
-    \ 'genshi': { 'left': '<!--','right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
+    \ 'genshi': { 'left': '<!--', 'right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
     \ 'gentoo-conf-d': { 'left': '#' },
     \ 'gentoo-env-d': { 'left': '#' },
     \ 'gentoo-init-d': { 'left': '#' },
@@ -191,16 +193,18 @@ let s:delimiterMap = {
     \ 'gentoo-package-use': { 'left': '#' },
     \ 'gitcommit': { 'left': '#' },
     \ 'gitconfig': { 'left': ';' },
+    \ 'gitignore': { 'left': '#' },
     \ 'gitrebase': { 'left': '#' },
+    \ 'glsl': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'gnuplot': { 'left': '#' },
     \ 'go': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'groovy': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
-    \ 'gsp': { 'left': '<%--', 'right': '--%>', 'leftAlt': '<!--','rightAlt': '-->'},
+    \ 'gsp': { 'left': '<%--', 'right': '--%>', 'leftAlt': '<!--', 'rightAlt': '-->' },
     \ 'gtkrc': { 'left': '#' },
     \ 'h': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'haml': { 'left': '-#', 'leftAlt': '/' },
     \ 'handlebars': { 'left': '{{!-- ', 'right': ' --}}' },
-    \ 'haskell': { 'left': '{-','right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 },
+    \ 'haskell': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 },
     \ 'haxe': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'hb': { 'left': '#' },
     \ 'hbs': { 'left': '{{!-- ', 'right': ' --}}' },
@@ -209,7 +213,7 @@ let s:delimiterMap = {
     \ 'hog': { 'left': '#' },
     \ 'hostsaccess': { 'left': '#' },
     \ 'htmlcheetah': { 'left': '##' },
-    \ 'htmldjango': { 'left': '<!--','right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
+    \ 'htmldjango': { 'left': '<!--', 'right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
     \ 'htmlos': { 'left': '#', 'right': '/#' },
     \ 'hxml': { 'left': '#' },
     \ 'hyphy': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -218,6 +222,7 @@ let s:delimiterMap = {
     \ 'idl': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'idlang': { 'left': ';' },
     \ 'idris': { 'leftAlt': '--', 'left': '{-', 'right': '-}' },
+    \ 'incar': { 'left': '!' },
     \ 'inform': { 'left': '!' },
     \ 'inittab': { 'left': '#' },
     \ 'ishd': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -230,7 +235,7 @@ let s:delimiterMap = {
     \ 'javascript.jquery': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'jess': { 'left': ';' },
     \ 'jgraph': { 'left': '(*', 'right': '*)' },
-    \ 'jinja': { 'left': '<!--','right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
+    \ 'jinja': { 'left': '<!--', 'right': '-->', 'leftAlt': '{#', 'rightAlt': '#}' },
     \ 'jproperties': { 'left': '#' },
     \ 'jsp': { 'left': '<%--', 'right': '--%>' },
     \ 'julia': { 'left': '#' },
@@ -239,8 +244,8 @@ let s:delimiterMap = {
     \ 'lace': { 'left': '--' },
     \ 'laravel': { 'left': '{{--', 'right': '--}}' },
     \ 'ldif': { 'left': '#' },
-    \ 'less': { 'left': '/*','right': '*/' },
-    \ 'lhaskell': { 'left': '>{-','right': '-}', 'leftAlt': '>-- ' },
+    \ 'less': { 'left': '/*', 'right': '*/' },
+    \ 'lhaskell': { 'left': '>{-', 'right': '-}', 'leftAlt': '>-- ' },
     \ 'lilo': { 'left': '#' },
     \ 'lilypond': { 'left': '%' },
     \ 'liquid': { 'left': '{% comment %}', 'right': '{% endcomment %}' },
@@ -267,15 +272,17 @@ let s:delimiterMap = {
     \ 'master': { 'left': '$' },
     \ 'matlab': { 'left': '%', 'leftAlt': '%{', 'rightAlt': '%}' },
     \ 'mel': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'meson': { 'left': '#' },
     \ 'mib': { 'left': '--' },
-    \ 'mips': { 'left': '#'},
-    \ 'mirah': {'left': '#'},
+    \ 'mips': { 'left': '#' },
+    \ 'mirah': {'left': '#' },
     \ 'mkd': { 'left': '<!---', 'right': '-->' },
     \ 'mma': { 'left': '(*', 'right': '*)' },
     \ 'model': { 'left': '$', 'right': '$' },
     \ 'moduala.': { 'left': '(*', 'right': '*)' },
     \ 'modula2': { 'left': '(*', 'right': '*)' },
     \ 'modula3': { 'left': '(*', 'right': '*)' },
+    \ 'molpro': { 'left': '!' },
     \ 'monk': { 'left': ';' },
     \ 'mush': { 'left': '#' },
     \ 'mustache': { 'left': '{{!', 'right': '}}' },
@@ -306,7 +313,7 @@ let s:delimiterMap = {
     \ 'ox': { 'left': '//' },
     \ 'paludis-use-conf': { 'left': '#' },
     \ 'pandoc': { 'left': '<!--', 'right': '-->' },
-    \ 'pascal': { 'left': '{','right': '}', 'leftAlt': '(*', 'rightAlt': '*)' },
+    \ 'pascal': { 'left': '{', 'right': '}', 'leftAlt': '(*', 'rightAlt': '*)' },
     \ 'patran': { 'left': '$', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'pcap': { 'left': '#' },
     \ 'pccts': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -321,6 +328,7 @@ let s:delimiterMap = {
     \ 'plm': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'plsql': { 'left': '-- ', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'po': { 'left': '#' },
+    \ 'poscar': { 'left': '!' },
     \ 'postscr': { 'left': '%' },
     \ 'pov': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'povini': { 'left': ';' },
@@ -361,11 +369,12 @@ let s:delimiterMap = {
     \ 'scilab': { 'left': '//' },
     \ 'scons': { 'left': '#' },
     \ 'scsh': { 'left': ';' },
-    \ 'scss': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
+    \ 'scss': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'sed': { 'left': '#' },
     \ 'sgmldecl': { 'left': '--', 'right': '--' },
     \ 'sgmllnx': { 'left': '<!--', 'right': '-->' },
     \ 'sh': { 'left': '#' },
+    \ 'shader_test': { 'left': '#' },
     \ 'sicad': { 'left': '*' },
     \ 'sile': { 'left': '%' },
     \ 'simula': { 'left': '%', 'leftAlt': '--' },
@@ -400,9 +409,9 @@ let s:delimiterMap = {
     \ 'sshdconfig': { 'left': '#' },
     \ 'st': { 'left': '"' },
     \ 'stan': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
-    \ 'stp': { 'left': '/*','right': '*/', 'leftAlt': '//' },
+    \ 'stp': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'supercollider': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
-    \ 'swift': { 'left': '/*','right': '*/', 'leftAlt': '//' },
+    \ 'swift': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'systemverilog': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'tads': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'tags': { 'left': ';' },
@@ -431,9 +440,10 @@ let s:delimiterMap = {
     \ 'uil': { 'left': '!' },
     \ 'upstart': { 'left': '#' },
     \ 'vala': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'vasp': { 'left': '!' },
     \ 'vb': { 'left': "'" },
     \ 'velocity': { 'left': "##", 'right': "", 'leftAlt': '#*', 'rightAlt': '*#' },
-    \ 'vera': { 'left': '/*','right': '*/', 'leftAlt': '//' },
+    \ 'vera': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'verilog': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'verilog_systemverilog': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'vgrindefs': { 'left': '#' },
@@ -616,7 +626,7 @@ function s:AppendCommentToLine()
 
     "stick the delimiters down at the end of the line. We have to format the
     "comment with spaces as appropriate
-    execute ":normal! " . insOrApp . (isLineEmpty ? '' : ' ') . left . right 
+    execute ":normal! " . insOrApp . (isLineEmpty ? '' : ' ') . left . right
 
     " if there is a right delimiter then we gotta move the cursor left
     " by the length of the right delimiter so we insert between the delimiters
@@ -1389,7 +1399,7 @@ function s:RemoveDelimiters(left, right, line)
 
         "if the user has specified that there is a space before the right delimiter
         "then check for the space and remove it if it is there
-        if delimsSpaced && strpart(line, rightIndx-s:lenSpaceStr, s:lenSpaceStr) == s:spaceStr && s:Multipart()
+        if delimsSpaced && strpart(line, rightIndx-s:lenSpaceStr, s:lenSpaceStr) == s:spaceStr && (s:Multipart() || s:AltMultipart())
             let line = strpart(line, 0, rightIndx-s:lenSpaceStr) . strpart(line, rightIndx)
         endif
     endif
@@ -1411,7 +1421,7 @@ function s:SetupStateBeforeLineComment(topLine, bottomLine)
     let state = {'foldmethod' : &foldmethod,
                 \'ignorecase' : &ignorecase}
 
-    " Vim's foldmethods are evaluated every time we use 'setline', which can 
+    " Vim's foldmethods are evaluated every time we use 'setline', which can
     " make commenting wide ranges of lines VERY slow. We'll change it to
     " manual, do the commenting stuff and recover it later. To avoid slowing
     " down commenting few lines, we avoid doing this for ranges smaller than
@@ -1615,6 +1625,16 @@ function s:UncommentLinesSexy(topline, bottomline)
 
         let theLine = s:SwapOuterPlaceHoldersForMultiPartDelims(theLine)
         call setline(bottomline, theLine)
+    endif
+
+    " remove trailing whitespaces for first and last line
+    if g:NERDTrimTrailingWhitespace == 1
+        let theLine = getline(a:bottomline)
+        let theLine = s:TrimTrailingWhitespace(theLine)
+        call setline(a:bottomline, theLine)
+        let theLine = getline(a:topline)
+        let theLine = s:TrimTrailingWhitespace(theLine)
+        call setline(a:topline, theLine)
     endif
 endfunction
 

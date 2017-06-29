@@ -29,6 +29,7 @@ let s:vcs_config = {
 \    'cmd': 'git status --porcelain -- ',
 \    'untracked_mark': '??',
 \    'update_branch': 's:update_git_branch',
+\    'exclude': '\.git',
 \    'branch': '',
 \    'untracked': {},
 \  },
@@ -36,6 +37,7 @@ let s:vcs_config = {
 \    'exe': 'hg',
 \    'cmd': 'hg status -u -- ',
 \    'untracked_mark': '?',
+\    'exclude': '\.hg',
 \    'update_branch': 's:update_hg_branch',
 \    'branch': '',
 \    'untracked': {},
@@ -122,7 +124,7 @@ function! s:update_hg_branch(path)
   if s:has_lawrencium
     let stl=lawrencium#statusline()
     if !empty(stl) && s:has_async
-      call s:get_mq_async('hg qtop', expand('%:p'))
+      call s:get_mq_async('LC_ALL=C hg qtop', expand('%:p'))
     endif
     if exists("s:mq") && !empty(s:mq)
       if stl is# 'default'
@@ -165,6 +167,10 @@ function! s:update_untracked()
 
   let l:needs_update = 1
   for vcs in keys(s:vcs_config)
+    if l:file =~ s:vcs_config[vcs].exclude
+      " Skip check for files that live in the exclude directory
+      let l:needs_update = 0
+    endif
     if has_key(s:vcs_config[vcs].untracked, l:file)
       let l:needs_update = 0
       call s:update_untracked_in_buffer_config(l:file, vcs)
@@ -256,7 +262,7 @@ if s:has_async
 
   function! s:get_mq_async(cmd, file)
     if g:airline#util#is_windows && &shell =~ 'cmd'
-      let cmd = a:cmd. shellescape(a:file)
+      let cmd = a:cmd
     else
       let cmd = ['sh', '-c', a:cmd]
     endif
@@ -303,7 +309,7 @@ function! airline#extensions#branch#head()
     if !empty(b:airline_head)
       let b:airline_head .= ' | '
     endif
-    let b:airline_head .= (len(l:heads) > 1 ? s:vcs_config[l:vcs].exe : '') . s:format_name(l:heads[l:vcs])
+    let b:airline_head .= (len(l:heads) > 1 ? s:vcs_config[l:vcs].exe .':' : '') . s:format_name(l:heads[l:vcs])
     let b:airline_head .= b:buffer_vcs_config[vcs].untracked
   endfor
 
@@ -319,7 +325,7 @@ function! airline#extensions#branch#head()
   if exists("g:airline#extensions#branch#displayed_head_limit")
     let w:displayed_head_limit = g:airline#extensions#branch#displayed_head_limit
     if len(b:airline_head) > w:displayed_head_limit - 1
-      let b:airline_head = b:airline_head[0:(w:displayed_head_limit - 1)].(&encoding ==? 'utf-8' ?  '?? : '.')
+      let b:airline_head = b:airline_head[0:(w:displayed_head_limit - 1)].(&encoding ==? 'utf-8' ?  '…' : '.')
     endif
   endif
 
@@ -341,7 +347,7 @@ function! airline#extensions#branch#get_head()
 endfunction
 
 function! s:check_in_path()
-  if !exists('b:airline_branch_path')
+  if !exists('b:airline_file_in_root')
     let root = get(b:, 'git_dir', get(b:, 'mercurial_dir', ''))
     let bufferpath = resolve(fnamemodify(expand('%'), ':p'))
 
@@ -351,7 +357,13 @@ function! s:check_in_path()
         let root = expand(fnamemodify(root, ':h'))
       else
         " else it's the newer format, and we need to guesstimate
-        let pattern = '\.git\(\\\|\/\)modules\(\\\|\/\)'
+        " 1) check for worktrees
+        if match(root, 'worktrees') > -1
+          " worktree can be anywhere, so simply assume true here
+          return 1
+        endif
+        " 2) check for submodules
+        let pattern = '\.git[\\/]\(modules\)[\\/]'
         if match(root, pattern) >= 0
           let root = substitute(root, pattern, '', '')
         endif

@@ -1,14 +1,23 @@
 " MIT License. Copyright (c) 2013-2016 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
 
+" TODO: Try to cache winwidth(0) function
+" e.g. store winwidth per window and access that, only update it, if the size
+" actually changed.
 scriptencoding utf-8
 
 call airline#init#bootstrap()
 let s:spc = g:airline_symbols.space
 
-function! airline#util#shorten(text, winwidth, minwidth)
+function! airline#util#shorten(text, winwidth, minwidth, ...)
   if winwidth(0) < a:winwidth && len(split(a:text, '\zs')) > a:minwidth
-    return matchstr(a:text, '^.\{'.a:minwidth.'}').'…'
+    if get(a:000, 0, 0)
+      " shorten from tail
+      return '…'.matchstr(a:text, '.\{'.a:minwidth.'}$')
+    else
+      " shorten from beginning of string
+      return matchstr(a:text, '^.\{'.a:minwidth.'}').'…'
+    endif
   else
     return a:text
   endif
@@ -82,7 +91,7 @@ endif
 " available. This way we avoid overwriting v:shell_error, which might
 " potentially disrupt other plugins.
 if has('nvim')
-  function! s:system_job_handler(job_id, data, event)
+  function! s:system_job_handler(job_id, data, event) dict
     if a:event == 'stdout'
       let self.buf .=  join(a:data)
     endif
@@ -97,10 +106,7 @@ if has('nvim')
     if l:id < 1
       return system(a:cmd)
     endif
-    let l:ret_code = jobwait([l:id])
-    if l:ret_code != [0]
-      return system(a:cmd)
-    endif
+    call jobwait([l:id])
     return l:config.buf
   endfunction
 else
