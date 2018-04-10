@@ -1,4 +1,4 @@
-*wl_doc.txt*    For Vim version 7.3.
+﻿*wl_doc.txt*    For Vim version 7.3.
 
     My Note
 ==============================================================================
@@ -10,6 +10,8 @@ Contents
 
 ==============================================================================
 SHELL CMD                                   *shell-cmd*
+
+:%!astyle       用 astyle 格式化目前檔案
 
 :Ex             開啟目錄瀏覽器，注意首字母E是大寫的
 
@@ -57,6 +59,11 @@ when press \ + Space, insert white spec at cursor. >
     nmap \<SPACE>  i<SPACE><ESC>
 <
 
+Close quickFix window when press 'enter' >
+ In .vimrc
+    autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
+<
+
 diff a.file b.file >
     $ vim FILE_LEFT
     :vertical diffsplit FILE_RIGHT
@@ -100,7 +107,7 @@ HOTKEY                                       *hotkey*
 -------------- *區塊註解*
 於控制選項(ESC下), 游標移動至要註解的開頭第一個字
 按Ctrl-V, 接著往下選取要註解的區塊
-按大寫I插入. 插入註解符號(如’, //, #)
+按大寫I插入. 插入註解符號(如』, //, #)
 最後, 按Esc, 返回控制選項
 ps. windows環境下, 需先取消預設 hotkey ctrl-v = 貼上 (unmap <C-V> in _vimrc)
 
@@ -194,6 +201,49 @@ step 1. 建立搜尋file list (generate cscope.files)
 setp 2. 開始建立索引 cscope.out
     :cscope -bkq -i cscope.files
 
+-------------- *gtags, gnu-global*
+:cs add GTAGS
+
+my hot key >
+    <C-\>] = :Gtags -r <C-R>=expand("<cword>")<CR><CR>
+    <C-\>' :Gtags -s <C-R>=expand("<cword>")<CR><CR>
+<
+
+tab key 可以自動補全函數 >
+    :Gtags func_name     " 打開函數瀏覽
+    :Gtags -r func_name  " search reference func_name
+    :Gtags -s func_name  " search symbol definition
+<
+
+search word of cursor >
+    :GtagsCursor
+<
+
+At project root directory >
+    $ gtags -f cscope.files
+<
+
+reflash database >
+    $ global -u
+<
+
+-------------- *gj + idutils*
+install idutils
+$ sudo apt-get install id-utils  # Debian / Ubuntu
+
+$ gj -i         # generate ID database
+
+\g : Find all occurence of the symbol under the cursor.
+\G : Find all possible declarations or definitions.
+\d : Find all possible definitions based on the debug info in ELF binaries. (much less results)
+
+In quickFix window
+q : close quickFix window
+s : open file horizonally and switch window
+v : open file vertically and switch window
+gv: open file vertically
+go: open file
+
 -------------- *EasyGrep*
 將在文件中搜索當前光標下的單詞 >
     \vv
@@ -218,6 +268,14 @@ Grep也可以帶參數, 比如:Grep -ir word, r表示遞歸目錄. i表示不區
 打開選項菜單 >
     \vo or :GrepOptions
 <
+
+-------------- *tagbar.vim*
+let g:tagbar_iconchars = ['>', 'v']
+
++ 表示該類是 public 
+- 表示一個 private
+# 則是表示一個 protected
+
 -------------- *A.vim*
 開啟對應的 header file
 :A      切換到 h file
@@ -270,6 +328,13 @@ In "normal mode"
 \bv : vertical split screen buffer browser
 \bs : horizontal split screen buffer browser
 q   : exit
+
+-------------- *airline*
+tabline
+:bn     跳下一個buffer
+:bp     往上一個buffer
+:b n    跳往第n個buffer
+:bd     關掉目前buffer
 
 
 -------------- *MiniBufExplorer*
@@ -347,6 +412,55 @@ Source Explorer     自動顯示定義
 \m              highlight selected word
 :MarkClear      clear all mark
 
+-------------- *ack.vim*
+需要先安裝 ack pack (perl)
+    https://beyondgrep.com/documentation/
+
+ack (perl) >
+    # full search in a directory and print context
+    $ ack [options] PATTERN [directory path]
+
+    # default directory './'
+    $ ack PATTERN
+
+    # search and only list files
+    $ ack -l PATTERN [directory path]
+
+    # open all files with vim
+    $ vim -o `ack -l PATTERN [directory path]`
+
+    # filter searching
+    $ ack -l mkv ./libavformat/*.[hd]
+<
+
+ack.vim >
+    : Ack [options] PATTERN [directory path]
+<
+
+
+
+-------------- *vbookmark*
+mm  用於設定或者刪除一個書籤，或者使用命令 VbookmarkToggle
+mn  用於跳轉到下一個書籤，或者使用命令 VbookmarkNext
+mp  用於跳轉到前一個書籤，或者使用命令 VbookmarkPrevious
+ma  用於刪除所有書籤，或者使用命令 VbookmarkClearAll
+
+-------------- *bash-support*
+I set <leader> to ','
+
+<leader>sc      case in … esac
+<leader>sl      elif then
+<leader>sf      for in do done
+<leader>sfo     for ((…)) do done
+<leader>si      if then fi
+<leader>sie     if then else fi
+<leader>ss      select in do done
+<leader>st      until do done
+<leader>sw      while do done
+<leader>sfu     function
+<leader>se      echo ­e 「\n」
+<leader>sp      printf 「\n」
+<leader>hh      syntax help
 
 -------------- *DrawIt*
    \di to start DrawIt and

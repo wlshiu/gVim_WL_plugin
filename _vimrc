@@ -73,7 +73,7 @@
         let g:NERDTreeDirArrows=0
 
         "// only show
-        let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\|.mk\|.py\|Makefile\)\@<!$[[file]]']
+        let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\|.mk\|.py\|Makefile\|.s\|.S\|.ld\)\@<!$[[file]]']
 
         nmap nt :NERDTreeToggle<CR>
     " }}}1
@@ -82,6 +82,17 @@
     "-----------------
     " nerdcommenter: {{{1
         Plugin 'scrooloose/nerdcommenter'
+    " }}}1
+
+
+    "-----------------
+    " vimgrep : {{{1
+        Plugin 'vim-scripts/vimgrep.vim'
+        " When you press <Leader>gv you vimgrep after the selected text
+        nnoremap <silent> <Leader>gv :vimgrep! /<C-R>=expand("<cword>")<CR>/j **/*.[ch]<CR>
+
+        " Open vimgrep and put the cursor in the right position
+        map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
     " }}}1
 
 
@@ -514,24 +525,6 @@ nmap hp <Esc>:helptags $VIMRUNTIME\doc <CR>
 
 "// 取消 ctrl+v 定義
 unmap <C-V>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

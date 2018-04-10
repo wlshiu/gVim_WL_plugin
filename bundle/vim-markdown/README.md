@@ -123,7 +123,7 @@ let g:vim_markdown_toc_autofit = 1
 
 ### Text emphasis restriction to single-lines
 
-By default text emphasis works across multiple lines until a closing token is found. However, it's possible to restrict text emphasis to a single line (ie, for it to be applied a closing token must be found on the same line). To do so:
+By default text emphasis works across multiple lines until a closing token is found. However, it's possible to restrict text emphasis to a single line (i.e., for it to be applied a closing token must be found on the same line). To do so:
 
 ```vim
 let g:vim_markdown_emphasis_multiline = 0
@@ -173,6 +173,37 @@ This will cause the following to be highlighted using the `cs` filetype syntax.
     ```
 
 Default is `['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']`.
+
+### Follow named anchors
+
+This feature allows the `ge` command to follow named anchors in links of the form
+`file#anchor` or just `#anchor`, where file may omit the `.md` extension as
+usual. Two variables control its operation:
+
+```vim
+let g:vim_markdown_follow_anchor = 1
+```
+
+This tells vim-markdown whether to attempt to follow a named anchor in a link or
+not. When it is 1, and only if a link can be split in two parts by the pattern
+'#', then the first part is interpreted as the file and the second one as the
+named anchor. This also includes urls of the form `#anchor`, for which the first
+part is considered empty, meaning that the target file is the current one. After
+the file is opened, the anchor will be searched.
+
+Default is `0`.
+
+```vim
+let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
+```
+
+This expression will be evaluated substituting `v:anchor` with a quoted string
+that contains the anchor to visit. The result of the evaluation will become the
+real anchor to search in the target file. This is useful in order to convert
+anchors of the form, say, `my-section-title` to searches of the form `My Section
+Title` or `<<my-section-title>>`.
+
+Default is `''`.
 
 ### Syntax extensions
 
@@ -252,6 +283,14 @@ If you follow a link like this `[link text](link-url)` using the `ge` shortcut, 
 
 ```vim
 let g:vim_markdown_autowrite = 1
+```
+
+### Change default file extension
+
+If you would like to use a file extension other than `.md` you may do so using the `vim_markdown_auto_extension_ext` variable:
+
+```vim
+let g:vim_markdown_auto_extension_ext = 'txt'
 ```
 
 ## Mappings
