@@ -28,6 +28,18 @@
         Plugin 'wlshiu/vim-wl'
     " }}}1
 
+    "-----------------
+    " gtags: {{{1
+        let gcscope='$VIMRUNTIME\gtags-cscope.exe'
+        set cscopetag
+        set cscopeprg=gcscope
+        let GtagsCscope_Auto_Load = 1
+        let GtagsCscope_Quiet = 1
+        let Gtags_No_Auto_Jump = 1
+
+        nmap <C-\>] :Gtags -r <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-\>' :Gtags -s <C-R>=expand("<cword>")<CR><CR>
+    " }}}1
 
     "-----------------
     " CtrlP: {{{1
@@ -333,6 +345,35 @@
         map <A-g> <Esc>:call Do_CsTag() <CR>
         nmap tg <Esc>:call Do_CsTag() <CR>
 
+
+    " }}}1
+
+    "-----------------
+    " gtags: {{{1
+        let gtags='$VIMRUNTIME\gtags.exe'
+        function Do_GTag()
+            let cur_dir = getcwd()
+
+            if !filereadable("cscope.files")
+                if (has('win32') || has('win64'))
+                    silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hh,*.py > cscope.files"
+                else
+                    silent! execute "!find . -name '*.h' -o -name '*.hh' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.py' > cscope.files"
+                endif
+            endif
+
+            if (executable('ctags'))
+                silent! execute "!ctags --c++-kinds=+p --fields=+iaS --extra=+q --sort=yes -L cscope.files"
+            endif
+
+            if (executable('gtags'))
+                silent! execute "!gtags -f ./cscope.files"
+                execute "normal :"
+                if filereadable("GTAGS")
+                    execute "cs add GTAGS"
+                endif
+            endif
+        endfunction
 
     " }}}1
 
