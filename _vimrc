@@ -104,9 +104,19 @@
         nnoremap <silent> <Leader>gv :vimgrep! /<C-R>=expand("<cword>")<CR>/j **/*.[ch]<CR>
 
         " Open vimgrep and put the cursor in the right position
-        map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+        map <Leader>g :vimgrep /<C-R>=expand("<cword>")<CR>/j **/*.
+
+        " type your pattern
+        " map <leader>g :vimgrep //j **/*.<left><left><left><left><left><left><left><left>
     " }}}1
 
+    "-----------------
+    " ack.vim : {{{1
+        Plugin 'mileszs/ack.vim'
+
+        let g:ackprg = 'ag --nogroup --column --nocolor'
+        map <Leader>ag :Ack <C-R>=expand("<cword>")<CR><CR>
+    " }}}1
 
     "-----------------
     " tagbar: {{{1
