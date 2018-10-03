@@ -35,9 +35,8 @@ endfunction
 function! airline#extensions#tabline#buffers#on()
   augroup airline_tabline_buffers
     autocmd!
-    autocmd BufDelete * call airline#extensions#tabline#buffers#invalidate()
-    autocmd User BufMRUChange call airline#extensions#tabline#buflist#invalidate()
-    autocmd User BufMRUChange call airline#extensions#tabline#buffers#invalidate()
+    autocmd BufDelete * call airline#extensions#tabline#buflist#clean()
+    autocmd User BufMRUChange call airline#extensions#tabline#buflist#clean()
   augroup END
 endfunction
 
@@ -98,7 +97,7 @@ function! airline#extensions#tabline#buffers#get()
       return '%'.bufnum.'@airline#extensions#tabline#buffers#clickbuf@'
     endfunction
 
-    function b.get_posttitle(i) dict
+    function! b.get_posttitle(i) dict
       return '%X'
     endfunction
   endif
@@ -107,7 +106,9 @@ function! airline#extensions#tabline#buffers#get()
     let bufnum = get(self.buffers, a:i, -1)
     let group = self.get_group(a:i)
     let pgroup = self.get_group(a:i - 1)
-    if get(g:, 'airline_powerline_fonts', 0)
+    " always add a space when powerline_fonts are used
+    " or for the very first item
+    if get(g:, 'airline_powerline_fonts', 0) || a:i == 0
       let space = s:spc
     else
       let space= (pgroup == group ? s:spc : '')

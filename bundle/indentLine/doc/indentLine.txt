@@ -152,6 +152,10 @@ g:indentLine_leadingSpaceChar                   *g:indentLine_leadingSpaceChar*
 g:indentLine_leadingSpaceEnabled                *g:indentLine_leadingSpaceEnabled*
                 Specify whether to show leading spaces by default.
                 Default value is 0.
+
+g:indentLine_defaultGroup                       *g:indentLine_defaultGroup*
+                Spceify a highlight group to use for default values
+				of g:indentLine_[bg]color_(term|gui)
 ==============================================================================
 COMMANDS                                         *indentLine-commands*
 
@@ -180,10 +184,14 @@ COMMANDS                                         *indentLine-commands*
 ==============================================================================
 FAQ                                              *indentLine-faq*
 
-Q. How can I make the indent line visuall similar to the line used in Sublime
+Q. How can I make the indent line visual similar to the line used in Sublime
     Text 2?
 
 A. Use let g:indentLine_char = '┊'
+
+Q. I don't see quotes in JSON.
+
+A. Use let g:vim_json_syntax_conceal = 0 or run :IndentLinesDisable
 
 ==============================================================================
 CHANGELOG                                        *indentLine-changelog*

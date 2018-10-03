@@ -65,7 +65,8 @@ hi difftext     guifg=black          guibg=hotpink1  gui=none
 hi diffdelete   guibg=gray45         guifg=black     gui=none
 
 "// syntax highlighting groups
-hi comment      guifg=darkgreen      gui=none
+" hi comment      guifg=darkgreen      gui=none
+hi comment      guifg=#00bb00     gui=none
 hi constant     guifg=salmon         gui=none
 hi identifier   guifg=skyblue        gui=none
 hi function     guifg=skyblue        gui=none
@@ -131,7 +132,7 @@ hi diffadd      ctermbg=4
 hi diffchange   ctermbg=5
 hi diffdelete   cterm=bold           ctermfg=4        ctermbg=6
 hi difftext     cterm=bold           ctermbg=1
-hi comment      ctermfg=darkgreen
+hi comment      ctermfg=34
 hi constant     ctermfg=brown
 hi special      ctermfg=DarkRed
 hi identifier   ctermfg=LightBlue

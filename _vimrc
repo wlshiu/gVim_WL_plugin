@@ -118,6 +118,7 @@
         map <Leader>ag :Ack <C-R>=expand("<cword>")<CR><CR>
     " }}}1
 
+
     "-----------------
     " tagbar: {{{1
         Plugin 'majutsushi/tagbar'
@@ -405,6 +406,7 @@ set fileformat=unix
 filetype plugin on
 
 set guifont=monaspace\ 12
+" colorscheme xoria256
 colorscheme wl_style
 
 "//設置視窗大小
@@ -551,6 +553,8 @@ nmap \de <Esc>:%s/\s\+$//g <CR>
 
 "// Remove the Windows ^M - when the encodings gets messed up
 nmap \dm <Esc>:%s/\r//g <CR>
+
+nmap \q :ccl<CR>
 
 "// when press \ + Enter, the cursor break context to next line.
 nmap \<CR>  i<CR><ESC>
