@@ -44,7 +44,7 @@ set nocompatible
 
     "-----------------
     " CtrlP: {{{1
-        Plugin 'kien/ctrlp.vim'
+        Plugin 'ctrlpvim/ctrlp.vim'
 
         " let g:ctrlp_map = '<A-w>'
         let g:ctrlp_clear_cache_on_exit=0
