@@ -116,7 +116,7 @@ set nocompatible
         Plugin 'mileszs/ack.vim'
 
         let g:ackprg = 'ag --nogroup --column --nocolor'
-        map <Leader>ag :Ack <C-R>=expand("<cword>")<CR><CR>
+        map <Leader>ag :Ack! <C-R>=expand("<cword>")<CR><CR>
     " }}}1
 
 
