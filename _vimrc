@@ -94,9 +94,19 @@ set nocompatible
 
     "-----------------
     " nerdcommenter: {{{1
-        Plugin 'scrooloose/nerdcommenter'
+    "    Plugin 'scrooloose/nerdcommenter'
     " }}}1
 
+    "-----------------
+    " vim-commenter: {{{1
+        " https://aben20807.blogspot.com/2018/03/1070313-vim-commenter.html
+        Plugin 'aben20807/vim-commenter'
+
+        let g:commenter_use_default_mapping = 1
+        let g:commenter_n_key = "<Leader>q"
+        let g:commenter_i_key = "<Leader>q"
+        let g:commenter_v_key = "<Leader>q"
+    " }}}1
 
     "-----------------
     " vimgrep : {{{1
