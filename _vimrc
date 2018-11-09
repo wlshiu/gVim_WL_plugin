@@ -94,18 +94,38 @@ set nocompatible
 
     "-----------------
     " nerdcommenter: {{{1
-    "    Plugin 'scrooloose/nerdcommenter'
+        Plugin 'scrooloose/nerdcommenter'
+        " switch '//' or '/* */' with <leader>ca
+
+        map <Leader>q <Leader>c<space>
+        " Add spaces after comment delimiters by default
+        let g:NERDSpaceDelims = 1
+
+        " Use compact syntax for prettified multi-line comments
+        let g:NERDCompactSexyComs = 1
+
+        " Align line-wise comment delimiters flush left instead of following code indentation
+        let g:NERDDefaultAlign = 'left'
+
+        " Allow commenting and inverting empty lines (useful when commenting a region)
+        let g:NERDCommentEmptyLines = 1
+
+        " Enable trimming of trailing whitespace when uncommenting
+        let g:NERDTrimTrailingWhitespace = 1
+
+        " Enable NERDCommenterToggle to check all selected lines is commented or not
+        let g:NERDToggleCheckAllLines = 1
     " }}}1
 
     "-----------------
     " vim-commenter: {{{1
         " https://aben20807.blogspot.com/2018/03/1070313-vim-commenter.html
-        Plugin 'aben20807/vim-commenter'
+        " Plugin 'aben20807/vim-commenter'
 
-        let g:commenter_use_default_mapping = 1
-        let g:commenter_n_key = "<Leader>q"
-        let g:commenter_i_key = "<Leader>q"
-        let g:commenter_v_key = "<Leader>q"
+        " let g:commenter_use_default_mapping = 1
+        " let g:commenter_n_key = "<Leader>q"
+        " let g:commenter_i_key = "<Leader>q"
+        " let g:commenter_v_key = "<Leader>q"
     " }}}1
 
     "-----------------
