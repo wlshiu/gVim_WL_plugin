@@ -499,6 +499,8 @@ set noswapfile
 
 "// 自動換行選項
 "set nowrap
+" Break lines at word (requires Wrap lines)
+set linebreak
 
 "// 檔案編碼
 set encoding=utf-8
