@@ -59,10 +59,10 @@ set nocompatible
         let g:ctrlp_match_window = 'results:200'
 
         if (has('win32') || has('win64'))
-            let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d /o-n *.h *.hh *.c *.cpp' " Windows
+            let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d /o-n *.h *.hh *.c *.cpp *.cc' " Windows
         else
             " MacOSX/Linux
-            let g:ctrlp_user_command = 'find %s -type f -name "*.h" -o -name "*.hh" -o -name "*.c" -o -name "*.cpp"'
+            let g:ctrlp_user_command = 'find %s -type f -name "*.h" -o -name "*.hh" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc"'
         endif
     " }}}1
 
@@ -86,7 +86,7 @@ set nocompatible
         let g:NERDTreeDirArrows=0
 
         "// only show
-        let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.hh\|.mk\|.py\|Makefile\|.s\|.S\|.ld\)\@<!$[[file]]']
+        let NERDTreeIgnore = ['\(\.c\|\.h\|\.cpp\|\.cc\|\.hh\|.mk\|.py\|Makefile\|.s\|.S\|.ld\)\@<!$[[file]]']
 
         nmap nt :NERDTreeToggle<CR>
     " }}}1
@@ -144,7 +144,7 @@ set nocompatible
     "-----------------
     " ack.vim : {{{1
         Plugin 'mileszs/ack.vim'
-
+        " --color-match
         let g:ackprg = 'ag --nogroup --column --color-match --nocolor --ignore tags'
         map <Leader>ag :Ack! <C-R>=expand("<cword>")<CR><CR>
     " }}}1
@@ -459,11 +459,10 @@ set tabstop=4
 "// 自動縮排長度
 set shiftwidth=4
 
-" 智慧對齊方式
-set smartindent
-
-"// 自動縮排
-set autoindent
+" // 縮排
+set cindent
+" set smartindent
+" set autoindent
 
 "// 逐層向上搜尋 tags file
 " set tags=tags;
@@ -504,7 +503,8 @@ set linebreak
 
 "// 檔案編碼
 set encoding=utf-8
-set fileencodings=utf-8,cp950
+" set fileencodings=utf-8,cp950
+set fileencodings=utf-8,cp950,ucs-bom,gb2312,gbk,gb18030,cp936
 set fileencoding=utf-8
 set termencoding=utf-8
 "// 解決菜單亂碼
@@ -525,6 +525,7 @@ set ignorecase
 "// 不對匹配的括號進行高亮顯示
 " let loaded_matchparen=1
 
+set incsearch
 set hlsearch
 
 "// highlights the matching braces
@@ -541,6 +542,14 @@ set ffs=unix
 "set foldmethod=indent  "// 依縮排
 set foldnestmax=3
 set foldcolumn=3
+
+
+" re-set in vim if no cursor line highlight
+set cursorline
+set cursorcolumn
+hi CursorLine cterm=none ctermbg=Black guibg=Black " ctermfg=White
+hi CursorColumn cterm=none ctermbg=Black guibg=Black " ctermfg=White
+
 
 "// diff setting
 if &diff
