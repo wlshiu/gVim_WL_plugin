@@ -8,8 +8,8 @@ if(has("win32"))
     "set guifont=fixedsys:h12
     set guifont=consolas:h12
     "set guifont=monaco:h10
-    
-    " full screen 
+
+    " full screen
     au GUIEnter * simalt ~x
 
 else
@@ -86,7 +86,7 @@ hi Label        guifg=cyan           gui=none
 
 "// color terminal definitions
 ""*cterm-colors*
-"NR-16   NR-8    COLOR NAME 
+"NR-16   NR-8    COLOR NAME
 "0       0       Black
 "1       4       DarkBlue
 "2       2       DarkGreen
@@ -141,7 +141,7 @@ hi type         ctermfg=LightBlue
 hi underlined   cterm=underline      ctermfg=5
 hi ignore       ctermfg=darkgrey
 hi error        cterm=bold           ctermfg=7        ctermbg=1
-hi number       ctermfg=red 
+hi number       ctermfg=red
 hi operator     ctermfg=DarkYellow
 hi string       ctermfg=DarkRed
 
@@ -165,6 +165,17 @@ hi link PreCondit       identifier
 match Error /\s\+$/
 "// show tab space
 set list listchars=tab:>.
+
+"// Search
+" highlight IncSearch    term=reverse cterm=underline ctermbg=32 ctermfg=159 gui=underline guibg=#0060c0 guifg=#80ffff
+" highlight Search       term=reverse cterm=NONE ctermbg=32 ctermfg=231 gui=NONE guibg=#0060c0 guifg=#f0f0f8
+
+"// Messages
+highlight ErrorMsg     term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
+highlight WarningMsg   term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
+highlight ModeMsg      term=bold cterm=bold ctermbg=236 ctermfg=86 gui=bold guibg=#2c2c2c guifg=#40f0d0
+highlight MoreMsg      term=bold cterm=bold ctermbg=236 ctermfg=51 gui=bold guibg=#2c2c2c guifg=#00ffff
+highlight Question     term=NONE cterm=bold ctermbg=236 ctermfg=226 gui=bold guibg=#2c2c2c guifg=#e8e800
 
 "/***************************************************************
 "* matchparen
