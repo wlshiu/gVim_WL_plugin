@@ -173,7 +173,7 @@ set list listchars=tab:>.
 "// Messages
 highlight ErrorMsg     term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
 highlight WarningMsg   term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
-highlight ModeMsg      term=bold cterm=bold ctermbg=236 ctermfg=86 gui=bold guibg=#2c2c2c guifg=#40f0d0
+highlight ModeMsg      term=bold cterm=bold ctermbg=236 ctermfg=215 gui=bold guibg=#2c2c2c guifg=#40f0d0
 highlight MoreMsg      term=bold cterm=bold ctermbg=236 ctermfg=51 gui=bold guibg=#2c2c2c guifg=#00ffff
 highlight Question     term=NONE cterm=bold ctermbg=236 ctermfg=226 gui=bold guibg=#2c2c2c guifg=#e8e800
 
