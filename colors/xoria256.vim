@@ -39,7 +39,7 @@ let colors_name = "xoria256"
 hi Normal       ctermfg=248 guifg=#d0d0d0 ctermbg=235 guibg=#1c1c1c cterm=none gui=none
 hi Cursor       ctermfg=232               ctermbg=11  guibg=#ffaf00
 hi CursorColumn                           ctermbg=238 guibg=#444444
-hi CursorLine                                                       cterm=none gui=none
+hi CursorLine                             ctermbg=0                 cterm=none  gui=none
 hi Error        ctermfg=15  guifg=#ffffff ctermbg=1   guibg=#800000
 hi ErrorMsg     ctermfg=15  guifg=#ffffff ctermbg=1   guibg=#800000
 hi FoldColumn   ctermfg=247 guifg=#9e9e9e ctermbg=233 guibg=#121212
@@ -85,9 +85,10 @@ hi Ignore       ctermfg=238 guifg=#444444
 hi Number       ctermfg=9 guifg=#dfaf87
 hi PreProc      ctermfg=45 guifg=#afdf87
 hi Special      ctermfg=174 guifg=#df8787
-hi Statement    ctermfg=12 guifg=#87afdf                           cterm=none gui=none
+hi Statement    ctermfg=62 guifg=#87afdf                           cterm=none gui=none
 hi Type         ctermfg=179 guifg=#afafdf                           cterm=none gui=none
 hi Operator     ctermfg=227 guifg=#f4e360        cterm=none gui=none
+hi Boolean      ctermfg=13 guifg=#ff00ff
 
 "" Special {{{2
 """ .diff {{{3
@@ -143,4 +144,15 @@ hi treeLink       ctermfg=182  guifg=#dfafdf
 
 "// show tail whitespace
 match Error /\s\+$/
+
+"// Search
+" highlight IncSearch    term=reverse cterm=underline ctermbg=32 ctermfg=159 gui=underline guibg=#0060c0 guifg=#80ffff
+" highlight Search       term=reverse cterm=NONE ctermbg=32 ctermfg=231 gui=NONE guibg=#0060c0 guifg=#f0f0f8
+
+"// Messages
+highlight ErrorMsg     term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
+highlight WarningMsg   term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
+highlight ModeMsg      term=bold cterm=bold ctermbg=236 ctermfg=86 gui=bold guibg=#2c2c2c guifg=#40f0d0
+highlight MoreMsg      term=bold cterm=bold ctermbg=236 ctermfg=51 gui=bold guibg=#2c2c2c guifg=#00ffff
+highlight Question     term=NONE cterm=bold ctermbg=236 ctermfg=226 gui=bold guibg=#2c2c2c guifg=#e8e800
 
