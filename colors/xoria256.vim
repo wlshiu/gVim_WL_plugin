@@ -144,3 +144,15 @@ hi treeLink       ctermfg=182  guifg=#dfafdf
 "// show tail whitespace
 match Error /\s\+$/
 
+"// Search
+" highlight IncSearch    term=reverse cterm=underline ctermbg=32 ctermfg=159 gui=underline guibg=#0060c0 guifg=#80ffff
+" highlight Search       term=reverse cterm=NONE ctermbg=32 ctermfg=231 gui=NONE guibg=#0060c0 guifg=#f0f0f8
+
+"// Messages
+highlight ErrorMsg     term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
+highlight WarningMsg   term=NONE cterm=bold ctermbg=236 ctermfg=219 gui=bold guibg=#2c2c2c guifg=#ffa0ff
+highlight ModeMsg      term=bold cterm=bold ctermbg=236 ctermfg=86 gui=bold guibg=#2c2c2c guifg=#40f0d0
+highlight MoreMsg      term=bold cterm=bold ctermbg=236 ctermfg=51 gui=bold guibg=#2c2c2c guifg=#00ffff
+highlight Question     term=NONE cterm=bold ctermbg=236 ctermfg=226 gui=bold guibg=#2c2c2c guifg=#e8e800
+
+
