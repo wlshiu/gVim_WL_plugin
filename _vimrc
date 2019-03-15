@@ -233,6 +233,17 @@ set nocompatible
     " }}}1
 
     "-----------------
+    " vim-gas: {{{1
+        " // gas (GNU Assembler)
+        " Plugin 'Shirk/vim-gas'
+        " // globally disable all x86_64 opcodes
+        " let g:gasDisableOpcodes='x86_64'
+
+        " // disable SSE and SSE2 for this buffer
+        " let b:gasDisableOpcodes='sse sse2'
+    " }}}1
+
+    "-----------------
     " FuzzyFinder: {{{1
         Plugin 'L9'
         Plugin 'FuzzyFinder'
@@ -584,6 +595,8 @@ let python_highlight_all=1
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.lds set filetype=ld
 au BufRead,BufNewFile *.expand set filetype=rtl
+au BufRead,BufNewFile *.S set filetype=gas
+au BufRead,BufNewFile *.s set filetype=gas
 "//=====================================================
 "// hot key
 "//=====================================================
