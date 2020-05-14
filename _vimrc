@@ -233,6 +233,13 @@ set nocompatible
     " }}}1
 
     "-----------------
+    " Hexmode : {{{1
+        Plugin 'fidian/hexmode'
+        let g:hexmode_xxd_options = '-g 1'
+        let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+    " }}}1
+
+    "-----------------
     " vim-gas: {{{1
         " // gas (GNU Assembler)
         " Plugin 'Shirk/vim-gas'
