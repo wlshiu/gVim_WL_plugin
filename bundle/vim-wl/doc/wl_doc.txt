@@ -29,6 +29,8 @@ SHELL CMD                                   *shell-cmd*
 
 :lcd %:h        切換work directory到目前file的目錄
 
+:retab          將目前檔案的 Tab 取代為 space
+
 :cw             秀出 quickFixf視窗
 
 :g/pattern/#    list search result
