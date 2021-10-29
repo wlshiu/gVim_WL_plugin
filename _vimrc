@@ -427,7 +427,7 @@ set nocompatible
             endif
 
             if (executable('gtags'))
-                silent! execute "!gtags -f ./cscope.files"
+                silent! execute "!gtags --gtagslable=pygments -f ./cscope.files"
                 execute "normal :"
                 if filereadable("GTAGS")
                     execute "cs add GTAGS"
